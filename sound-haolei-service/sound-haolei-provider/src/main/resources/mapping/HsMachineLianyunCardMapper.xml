@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sound.haolei.provider.dao.HsMachineLianyunCardMapper">
+  <resultMap id="BaseResultMap" type="com.sound.haolei.model.HsMachineLianyunCard">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="substation_id" jdbcType="INTEGER" property="substationId" />
+    <result column="card_id" jdbcType="VARCHAR" property="cardId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="house_admin_id" jdbcType="INTEGER" property="houseAdminId" />
+    <result column="admin_id" jdbcType="INTEGER" property="adminId" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="county" jdbcType="VARCHAR" property="county" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+  </resultMap>
+
+  <resultMap id="ResultMapAndName" type="com.sound.haolei.dto.HsMachineLianyunCardDto">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="card_id" jdbcType="VARCHAR" property="cardId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="house_admin_id" jdbcType="INTEGER" property="houseAdminId" />
+    <result column="admin_id" property="adminId" jdbcType="INTEGER" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="county" jdbcType="VARCHAR" property="county" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    
+    <result column="usermobile" jdbcType="VARCHAR" property="usermobile" />
+    <result column="userNickname" jdbcType="VARCHAR" property="userNickname" />
+    <result column="houseAdminMobile" jdbcType="VARCHAR" property="houseAdminMobile" />
+    <result column="houseAdminNickname" jdbcType="VARCHAR" property="houseAdminNickname" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, substation_id, card_id, user_id, house_admin_id, admin_id, province, city, county, 
+    address, ctime
+  </sql>
+  <sql id="Column_ListAndName">
+    id, card_id, user_id,(select mobile from hl_user where id=user_id) usermobile,(select nick_name from hl_user where id=user_id) userNickname, house_admin_id,(select mobile from hl_house_admin where id=house_admin_id) houseAdminMobile,(select nickname from hl_house_admin where id=house_admin_id) houseAdminNickname, admin_id, province, city, county, address, ctime
+  </sql>
+  
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hs_machine_lianyun_card
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hs_machine_lianyun_card
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sound.haolei.model.HsMachineLianyunCard">
+    insert into hs_machine_lianyun_card (id, substation_id, card_id, 
+      user_id, house_admin_id, admin_id, 
+      province, city, county, 
+      address, ctime)
+    values (#{id,jdbcType=INTEGER}, #{substationId,jdbcType=INTEGER}, #{cardId,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER}, #{houseAdminId,jdbcType=INTEGER}, #{adminId,jdbcType=INTEGER}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{county,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{ctime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sound.haolei.model.HsMachineLianyunCard">
+    insert into hs_machine_lianyun_card
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="substationId != null">
+        substation_id,
+      </if>
+      <if test="cardId != null">
+        card_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="houseAdminId != null">
+        house_admin_id,
+      </if>
+      <if test="adminId != null">
+        admin_id,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="county != null">
+        county,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="substationId != null">
+        #{substationId,jdbcType=INTEGER},
+      </if>
+      <if test="cardId != null">
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="houseAdminId != null">
+        #{houseAdminId,jdbcType=INTEGER},
+      </if>
+      <if test="adminId != null">
+        #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null">
+        #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sound.haolei.model.HsMachineLianyunCard">
+    update hs_machine_lianyun_card
+    <set>
+      <if test="substationId != null">
+        substation_id = #{substationId,jdbcType=INTEGER},
+      </if>
+      <if test="cardId != null">
+        card_id = #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="houseAdminId != null">
+        house_admin_id = #{houseAdminId,jdbcType=INTEGER},
+      </if>
+      <if test="adminId != null">
+        admin_id = #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null">
+        county = #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sound.haolei.model.HsMachineLianyunCard">
+    update hs_machine_lianyun_card
+    set substation_id = #{substationId,jdbcType=INTEGER},
+      card_id = #{cardId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      house_admin_id = #{houseAdminId,jdbcType=INTEGER},
+      admin_id = #{adminId,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      county = #{county,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      ctime = #{ctime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 自定义 -->
+  <!--@Description根据卡号查询 @author sushile  -->
+  <select id="selectByCardId" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select 
+  	 <include refid="Base_Column_List" />
+  	 from 
+  	 	 hs_machine_lianyun_card d
+  	 	 <where>
+	  	 	 <if test="cardId != null">
+	  	 	 	 d.card_id = #{cardId,jdbcType=VARCHAR}
+	  	 	 </if>
+  	 	 </where>
+  </select>
+
+  <!-- 根据卡号用户id查询 -->
+  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select 
+  	 <include refid="Base_Column_List" />
+  	 from 
+  	 	 hs_machine_lianyun_card d where 1=1 
+  	 	 <if test="userId != null">
+  	 	 	 and d.user_id = #{userId,jdbcType=VARCHAR}
+  	 	 </if>
+  </select>
+  
+  <!-- 查询管理员绑卡总条数 -->
+  <select id="queryCount" resultType="java.lang.Long" parameterType="java.util.Map">
+  	select
+ 		count(1)
+ 	from hs_machine_lianyun_card
+ 	where 1=1
+     <include refid="where"/>
+  </select>
+  
+  <!-- 获取管理员绑卡列表 -->
+  <select id="getList" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from hs_machine_lianyun_card
+    where 1=1
+    <if test="houseAdminId != null" >
+         and house_admin_id = #{houseAdminId}
+    </if>
+    <include refid="continueQuery"/> 
+    order by id desc
+    <include refid="continueLimit"/>
+  </select>
+  <sql id="continueQuery">
+  	<if test="currentId != null and currentId != '' and currentId != 0 ">
+        <if test="which != null and which != ''">
+            <if test="which == -1">
+                and id &lt; #{currentId}
+            </if>
+            <if test="which == 1">
+                and id &gt; #{currentId}
+            </if>
+        </if>
+    </if>
+  </sql>
+  <sql id="continueLimit">
+  	<if test="size != null and size != ''">
+  		limit #{size}
+  	</if>
+  </sql>
+
+  <sql id="orderby">
+  		<if test="orderStr != null and orderStr != ''" >
+  			order by ${orderStr}
+  		</if>
+  </sql>
+  <!-- 分页限制 -->
+  <sql id="limit">
+  	<if test="curRow!=null and limitSize!='' ">limit #{curRow},#{limitSize}</if>
+  </sql>
+  
+  <sql id="where">
+  
+	  <if test=" hSId != null">
+	  	and ${hSId}
+	  </if>
+  	<if test="houseAdminId != null">
+  		and house_admin_id = #{houseAdminId,jdbcType=INTEGER}
+  	</if>
+  	
+  	<if test="mchId != null and mchId != ''">
+  		and card_id  like  CONCAT(CONCAT('%', #{mchId}), '%')
+  	</if>
+  	
+  	<if test="usermobile != null and usermobile != ''">
+  		and user_id in (select id from hl_user where mobile like  CONCAT(CONCAT('%', #{usermobile}), '%')  ) 
+  	</if>
+  	
+  	<if test="houseAdminMobile != null and houseAdminMobile != ''">
+  		 and house_admin_id in (select id from hl_house_admin where mobile like  CONCAT(CONCAT('%', #{houseAdminMobile}), '%') )
+  	</if>
+  	
+  	
+  	<if test="provinceId != null and provinceId != ''">
+  		and province  like  CONCAT(CONCAT('%', #{provinceId}), '%')
+  	</if>
+  	
+  	<if test="cityId != null and cityId != ''">
+  		and city  like  CONCAT(CONCAT('%', #{cityId}), '%')
+  	</if>
+  	
+  	<if test="countryId != null and countryId != ''">
+  		and county  like  CONCAT(CONCAT('%', #{countryId}), '%')
+  	</if>
+  	
+  	<if test="ctimestart != null ">
+  		and ctime  &gt;=   #{ctimestart}
+  	</if>
+  	
+  	<if test="ctimeend != null ">
+  		and ctime  &lt;=   #{ctimeend}
+  	</if>
+
+  </sql>
+
+  
+  
+  
+  <!-- 批量删除回收机 -->
+  <delete id="batchDelMachines" parameterType="java.util.List">
+	delete from hs_machine_lianyun_card where id in
+	<foreach collection="list" index="index" item="item" open="(" separator="," close=")">     
+       ${item}     
+    </foreach> 
+  </delete>
+  
+</mapper>

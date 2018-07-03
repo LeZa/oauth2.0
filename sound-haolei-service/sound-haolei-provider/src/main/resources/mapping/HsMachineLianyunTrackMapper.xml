@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sound.haolei.provider.dao.HsMachineLianyunTrackMapper">
+  <resultMap id="BaseResultMap" type="com.sound.haolei.model.HsMachineLianyunTrack">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="substation_id" jdbcType="INTEGER" property="substationId" />
+    <result column="mchid" jdbcType="VARCHAR" property="mchid" />
+    <result column="card_id" jdbcType="VARCHAR" property="cardId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="cash_point" jdbcType="INTEGER" property="cashPoint"/>
+    <result column="level_point" jdbcType="INTEGER" property="levelPoint"/>
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="weight" jdbcType="INTEGER" property="weight" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, substation_id, mchid, card_id, user_id, cash_point, level_point, type, weight, ctime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hs_machine_lianyun_track
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hs_machine_lianyun_track
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sound.haolei.model.HsMachineLianyunTrack">
+    insert into hs_machine_lianyun_track (id, substation_id, mchid, 
+      card_id, user_id, cash_point, level_point, type, 
+      weight, ctime)
+    values (#{id,jdbcType=INTEGER}, #{substationId,jdbcType=INTEGER}, #{mchid,jdbcType=VARCHAR}, 
+      #{cardId,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{cashPoint,jdbcType=INTEGER}, #{levelPoint,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, 
+      #{weight,jdbcType=INTEGER}, #{ctime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sound.haolei.model.HsMachineLianyunTrack">
+    insert into hs_machine_lianyun_track
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="substationId != null">
+        substation_id,
+      </if>
+      <if test="mchid != null">
+        mchid,
+      </if>
+      <if test="cardId != null">
+        card_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="cashPoint != null">
+      	cash_point,
+      </if>
+      <if test="levelPoint != null">
+      	level_point,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="substationId != null">
+        #{substationId,jdbcType=INTEGER},
+      </if>
+      <if test="mchid != null">
+        #{mchid,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null">
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="cashPoint != null">
+      	#{cashPoint,jdbcType=INTEGER},
+      </if>
+      <if test="levelPoint != null">
+      	#{levelPoint,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sound.haolei.model.HsMachineLianyunTrack">
+    update hs_machine_lianyun_track
+    <set>
+      <if test="substationId != null">
+        substation_id = #{substationId,jdbcType=INTEGER},
+      </if>
+      <if test="mchid != null">
+        mchid = #{mchid,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null">
+        card_id = #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="cashPoint != null">
+      	cash_point = #{cashPoint,jdbcType=INTEGER},
+      </if>
+      <if test="levelPoint != null">
+      	level_point = #{levelPoint,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sound.haolei.model.HsMachineLianyunTrack">
+    update hs_machine_lianyun_track
+    set substation_id = #{substationId,jdbcType=INTEGER},
+      mchid = #{mchid,jdbcType=VARCHAR},
+      card_id = #{cardId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      cash_point = #{cashPoint,jdbcType=INTEGER},
+      level_point = #{levelPoint,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      weight = #{weight,jdbcType=INTEGER},
+      ctime = #{ctime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 通过联运卡号查询用户轨迹集合 -->
+  <select id="selectByCardId" resultMap="BaseResultMap">
+  	select 
+  	 <include refid="Base_Column_List" />
+  	 from hs_machine_lianyun_track where card_id = #{cardId}
+  </select>
+  
+  <!--@Description 添加联运回收机时 同步轨迹表里的回收数据   @author sushile  @date 20180309  -->
+  <select id="selectTrackByUserId" resultType="java.lang.String" parameterType="java.lang.String">
+  	select sum(weight) as weight
+  		from hs_machine_lianyun_track where user_id=#{userId}
+  		  and  substation_id = ${substationId} and  ctime &gt; #{startTime} and ctime &lt; #{endTime}
+  </select>
+
+    <!--@Description 根据卡号@author sushile @date 20170309-->
+    <select id="selectTrackByCardId" parameterType="java.util.Map" resultType="java.util.Map">
+        select id,type,weight,cash_point,(select nickname from hs_machine_lianyun${spell} gbu  where gbu.mchid = ack.mchid
+                ) as machineName from hs_machine_lianyun_track ack where card_id=#{cardId} and substation_id=#{substationId}
+                order by id desc
+
+    </select>
+
+
+
+    <!--@Description 添加联运回收机时 同步轨迹表里的回收数据   @author sushile  @date 20170808  -->
+    <select id="selectTrackByMchId" resultType="java.util.Map" parameterType="java.lang.String">
+        select type,sum(weight) as weight
+        from hs_machine_lianyun_track where mchid=#{mchId} and  substation_id = ${substationId} group by type
+    </select>
+
+  
+  <!--@Description 根据回收机id更新轨迹表里的分站id  @author sushile  @date 20170808  -->
+  <update id="updateTrackBySubId" parameterType="java.util.Map">
+    update hs_machine_lianyun_track
+    	set substation_id = ${substationId}
+     		where mchid = #{mchId}
+  </update>
+    <!-- 查询总条数 -->
+  <select id="queryCount" resultType="java.lang.Long" parameterType="java.util.Map">
+  	select 
+		   count(1)
+		    from hs_machine_lianyun_track ht 
+	    	left join hl_user hu on ht.user_id=hu.id
+	    	left join hs_machine_lianyun${substationNameSpell} un on ht.mchid = un.mchid
+    where 1=1
+   <include refid="where"/>
+  </select>
+  <!-- 查询符合结果的数据 -->
+  <select id="queryPageResult" resultType="java.util.Map" parameterType="java.util.Map">
+
+  		select 
+		     ht.id, ht.mchid,un.nickname as title,
+		     ( select name from  map_province ce where ce.id = un.province_id)province,
+		     ( select name from  map_city ty where ty.id = un.city_id)city,
+		     ( select name from map_county co where co.id = un.county_id)county,
+		     un.area,un.address,ht.card_id,  ht.user_id,  ht.type,  ht.weight,  ht.ctime ,
+		     hu.mobile, hu.realname ,hu.sex , hu.status ,hu.nick_name ,hu.grade ,hu.cash_points
+		    from hs_machine_lianyun_track ht 
+	    	left join hl_user hu on ht.user_id=hu.id
+	    	left join hs_machine_lianyun${substationNameSpell} un on ht.mchid = un.mchid
+    where 1=1
+    <include refid="where"/>
+     <include refid="orderby"/>
+    <include refid="limit"/>
+  </select>
+  
+  <sql id="where">
+  	<if test="mobile != null and mobile != ''">
+  		and hu.mobile like CONCAT(CONCAT('%', #{mobile}), '%')
+  	</if>
+  	<if test="realname != null and realname != ''">
+  		and hu.realname like CONCAT(CONCAT('%', #{realname}), '%')
+  	</if>
+  	<if test="type != null and type != ''">
+  		and ht.type = #{type}
+  	</if>
+  	<if test="mchId != null and mchId!='' ">
+  		and ht.mchid like CONCAT(CONCAT('%', #{mchId}), '%')
+  	</if>
+  	<if test="cardid != null and cardid!=''">
+  	  	and	ht.card_id like CONCAT(CONCAT('%', #{cardid}), '%')
+  	</if>	
+  	<if test="nickname != null and nickname != ''">
+  		and un.nickname like CONCAT(CONCAT('%', #{nickname}), '%') 
+  	</if>
+  	<if test="ctimestart != null and ctimestart != ''">
+  		and ht.ctime &gt;= #{ctimestart}
+  	</if>
+  	
+  	<if test="ctimeend != null and ctimeend != ''">
+  		and ht.ctime &lt;= #{ctimeend}
+  	</if>
+  </sql>
+   <sql id="orderby">
+  		<if test="orderStr != null and orderStr != ''" >
+  			order by ${orderStr}
+  		</if>
+  </sql>
+  <!-- 分页限制 -->
+  <sql id="limit">
+  	<if test="curRow!=null and limitSize!='' ">limit #{curRow},#{limitSize}</if>
+  </sql>
+</mapper>

@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sound.haolei.provider.dao.HlSubstationMapper" >
+  <resultMap id="BaseResultMap" type="com.sound.haolei.model.HlSubstation" >
+			 <id column="id" property="id" jdbcType="INTEGER" />
+			<result column="name" property="name" jdbcType="VARCHAR" />
+			<result column="letter" property="letter" jdbcType="VARCHAR" />
+			<result column="spell" property="spell" jdbcType="VARCHAR" />
+			<result column="type" property="type" jdbcType="TINYINT" />
+			<result column="mid" property="mid" jdbcType="INTEGER" />
+			<result column="status" property="status" jdbcType="TINYINT" />
+			<result column="is_custom_module" property="isCustomModule" jdbcType="TINYINT" />
+			<result column="hot_site" property="hotSite" jdbcType="TINYINT" />
+			<result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+			<result column="wechat_official_accounts_id" property="wechatOfficialAccountsId" jdbcType="VARCHAR" />
+			<result column="substation_phone" property="substationPhone" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+		id,
+		name,
+		letter,
+		spell,
+		type,
+		mid,
+		status,
+		is_custom_module,
+		hot_site,
+		ctime,
+		wechat_official_accounts_id,
+		substation_phone
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from hl_substation
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+	delete from hl_substation
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sound.haolei.model.HlSubstation" >
+	<selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+  		SELECT LAST_INSERT_ID() AS id
+  	</selectKey>
+    insert into hl_substation (
+			id,
+			name,
+			letter,
+			spell,
+			type,
+			mid,
+			status,
+			is_custom_module,
+			hot_site,
+			ctime,
+			wechat_official_accounts_id,
+			substation_phone
+	)
+    values (
+			#{id,jdbcType=INTEGER},
+			#{name,jdbcType=VARCHAR},
+			#{letter,jdbcType=VARCHAR},
+			#{spell,jdbcType=VARCHAR},
+			#{type,jdbcType=TINYINT},
+			#{mid,jdbcType=INTEGER},
+			#{status,jdbcType=TINYINT},
+			#{isCustomModule,jdbcType=TINYINT},
+			#{hotSite,jdbcType=TINYINT},
+			#{ctime,jdbcType=TIMESTAMP},
+			#{wechatOfficialAccountsId,jdbcType=VARCHAR},
+			#{substationPhone,jdbcType=VARCHAR}
+	  )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sound.haolei.model.HlSubstation" >
+	<selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+  		SELECT LAST_INSERT_ID() AS id
+  	</selectKey>
+    insert into hl_substation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+		<if test="id != null" >
+		id,
+		</if>
+		<if test="name != null" >
+		name,
+		</if>
+		<if test="letter != null" >
+		letter,
+		</if>
+		<if test="spell != null" >
+		spell,
+		</if>
+		<if test="type != null" >
+		type,
+		</if>
+		<if test="mid != null" >
+		mid,
+		</if>
+		<if test="status != null" >
+		status,
+		</if>
+		<if test="isCustomModule != null" >
+		is_custom_module,
+		</if>
+		<if test="hotSite != null" >
+		hot_site,
+		</if>
+		<if test="ctime != null" >
+		ctime,
+		</if>
+		<if test="wechatOfficialAccountsId != null" >
+		wechat_official_accounts_id,
+		</if>
+		<if test="substationPhone != null" >
+		substation_phone,
+		</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+		<if test="id != null" >
+		#{id,jdbcType=INTEGER},
+		</if>
+		<if test="name != null" >
+		#{name,jdbcType=VARCHAR},
+		</if>
+		<if test="letter != null" >
+		#{letter,jdbcType=VARCHAR},
+		</if>
+		<if test="spell != null" >
+		#{spell,jdbcType=VARCHAR},
+		</if>
+		<if test="type != null" >
+		#{type,jdbcType=TINYINT},
+		</if>
+		<if test="mid != null" >
+		#{mid,jdbcType=INTEGER},
+		</if>
+		<if test="status != null" >
+		#{status,jdbcType=TINYINT},
+		</if>
+		<if test="isCustomModule != null" >
+		#{isCustomModule,jdbcType=TINYINT},
+		</if>
+		<if test="hotSite != null" >
+		#{hotSite,jdbcType=TINYINT},
+		</if>
+		<if test="ctime != null" >
+		#{ctime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="wechatOfficialAccountsId != null" >
+		#{wechatOfficialAccountsId,jdbcType=VARCHAR},
+		</if>
+		<if test="substationPhone != null" >
+		#{substationPhone,jdbcType=VARCHAR},
+		</if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sound.haolei.model.HlSubstation" >
+    update hl_substation
+    <set >
+	<if test="name != null" >
+	name = #{name,jdbcType=VARCHAR},
+	</if>
+	<if test="letter != null" >
+	letter = #{letter,jdbcType=VARCHAR},
+	</if>
+	<if test="spell != null" >
+	spell = #{spell,jdbcType=VARCHAR},
+	</if>
+	<if test="type != null" >
+	type = #{type,jdbcType=TINYINT},
+	</if>
+	<if test="mid != null" >
+	mid = #{mid,jdbcType=INTEGER},
+	</if>
+	<if test="status != null" >
+	status = #{status,jdbcType=TINYINT},
+	</if>
+	<if test="isCustomModule != null" >
+	is_custom_module = #{isCustomModule,jdbcType=TINYINT},
+	</if>
+	<if test="hotSite != null" >
+	hot_site = #{hotSite,jdbcType=TINYINT},
+	</if>
+	<if test="ctime != null" >
+	ctime = #{ctime,jdbcType=TIMESTAMP},
+	</if>
+	<if test="wechatOfficialAccountsId != null" >
+	wechat_official_accounts_id = #{wechatOfficialAccountsId,jdbcType=VARCHAR},
+	</if>
+	<if test="substationPhone != null" >
+	substation_phone = #{substationPhone,jdbcType=VARCHAR},
+	</if>
+    </set>
+     where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sound.haolei.model.HlSubstation" >
+    update hl_substation
+    set 
+			name = #{name,jdbcType=VARCHAR},
+			letter = #{letter,jdbcType=VARCHAR},
+			spell = #{spell,jdbcType=VARCHAR},
+			type = #{type,jdbcType=TINYINT},
+			mid = #{mid,jdbcType=INTEGER},
+			status = #{status,jdbcType=TINYINT},
+			is_custom_module = #{isCustomModule,jdbcType=TINYINT},
+			hot_site = #{hotSite,jdbcType=TINYINT},
+			ctime = #{ctime,jdbcType=TIMESTAMP},
+			wechat_official_accounts_id = #{wechatOfficialAccountsId,jdbcType=VARCHAR},
+			substation_phone = #{substationPhone,jdbcType=VARCHAR}
+     where id = #{id,jdbcType=INTEGER}
+  </update>
+   <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hl_substation
+  </select>
+  <delete id="batchDelete">
+	delete from hl_substation
+    where id IN (${ids})
+  </delete>
+  <select id="selectByCondition" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hl_substation
+	<where>
+	<if test="id != null" >
+	and id = #{id,jdbcType=INTEGER}
+	</if>
+	<if test="name != null" >
+	and name = #{name,jdbcType=VARCHAR}
+	</if>
+	<if test="letter != null" >
+	and letter = #{letter,jdbcType=VARCHAR}
+	</if>
+	<if test="spell != null" >
+	and spell = #{spell,jdbcType=VARCHAR}
+	</if>
+	<if test="type != null" >
+	and type = #{type,jdbcType=TINYINT}
+	</if>
+	<if test="mid != null" >
+	and mid = #{mid,jdbcType=INTEGER}
+	</if>
+	<if test="status != null" >
+	and status = #{status,jdbcType=TINYINT}
+	</if>
+	<if test="isCustomModule != null" >
+	and is_custom_module = #{isCustomModule,jdbcType=TINYINT}
+	</if>
+	<if test="hotSite != null" >
+	and hot_site = #{hotSite,jdbcType=TINYINT}
+	</if>
+	<if test="ctime != null" >
+	and ctime = #{ctime,jdbcType=TIMESTAMP}
+	</if>
+	<if test="wechatOfficialAccountsId != null" >
+	and wechat_official_accounts_id = #{wechatOfficialAccountsId,jdbcType=VARCHAR}
+	</if>
+	<if test="substationPhone != null" >
+	and substation_phone = #{substationPhone,jdbcType=VARCHAR}
+	</if>
+	</where>
+  </select>
+  <select id="queryCount" resultType="java.lang.Long" parameterType="java.util.Map">
+	 select 
+    count(1)
+    from hl_substation
+	<include refid="page_where"/>
+  </select>
+  <select id="queryPageResult" resultType="java.util.Map" parameterType="java.util.Map">
+	select 
+    <include refid="Base_Column_List" />
+    from hl_substation
+	<include refid="page_where"/>
+	<include refid="page_order"/>
+	<include refid="page_limit"/>
+  </select>
+  <sql  id="page_where">
+  <where>
+	<if test="name != null" >
+		and name = #{name,jdbcType=VARCHAR}
+	</if>
+	<if test="letter != null" >
+		and letter = #{letter,jdbcType=VARCHAR}
+	</if>
+	<if test="spell != null" >
+		and spell = #{spell,jdbcType=VARCHAR}
+	</if>
+	<if test="type != null" >
+		and type = #{type,jdbcType=TINYINT}
+	</if>
+	<if test="mid != null" >
+		and mid = #{mid,jdbcType=INTEGER}
+	</if>
+	<if test="status != null" >
+		and status = #{status,jdbcType=TINYINT}
+	</if>
+	<if test="isCustomModule != null" >
+		and is_custom_module = #{isCustomModule,jdbcType=TINYINT}
+	</if>
+	<if test="hotSite != null" >
+		and hot_site = #{hotSite,jdbcType=TINYINT}
+	</if>
+	<if test="ctimeStart != null" >
+		and ctime &gt;= #{ctimeStart}
+	</if>
+	<if test="ctimeEnd != null" >
+		and ctime &lt;= #{ctimeEnd}
+	</if>
+	<if test="wechatOfficialAccountsId != null" >
+		and wechat_official_accounts_id = #{wechatOfficialAccountsId,jdbcType=VARCHAR}
+	</if>
+	<if test="substationPhone != null" >
+		and substation_phone = #{substationPhone,jdbcType=VARCHAR}
+	</if>
+  </where>
+  </sql>
+  <sql  id="page_order">
+	<if test="orderStr != null and orderStr != ''" >
+  		order by ${orderStr}
+  	</if>
+  </sql>
+  <sql id="page_limit">
+  	<if test="curRow!=null and limitSize!='' ">limit #{curRow},#{limitSize}</if>
+  </sql>
+  
+<!--   ###############################自定义sql开始#################################   -->
+
+  <select id="selectTypeByPublicNumberId" resultType="java.util.Map" parameterType="java.lang.String" >
+    select type*1 type,mid from hl_substation where wechat_official_accounts_id = #{publicnumberid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectProvinceCityByPublicNumberId1" resultType="java.util.Map" parameterType="java.util.Map" >
+	select mp.id pid,mp.name province,mc.id cid,mc.name city 
+	  from hl_substation hsu 
+	  left join map_city mc 
+	    on hsu.mid = mc.id 
+	  left join map_province mp 
+	    on mc.pid = mp.id 
+	 where hsu.type = 0
+	   and mc.id = #{mid,jdbcType=VARCHAR} 
+	   and hsu.wechat_official_accounts_id = #{publicnumberid,jdbcType=VARCHAR}
+  </select>
+<!-- 根据站点类型type和mid查询市级id和名称 -->
+  <select id="selectCityInfo" resultType="java.util.Map" parameterType="java.lang.String" >
+	select mcy.id,mcy.name 
+	  from hl_substation hsu 
+	  left join  map_county mc 
+	    on hsu.mid = mc.id 
+	  left join map_city mcy 
+	    on mc.cid = mcy.id 
+	 where type = 1 and mc.id = #{mid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectProvinceCityByPublicNumberId2" resultType="java.util.Map" parameterType="java.lang.String" >
+	select mp.id pid,mp.name province from map_province mp left join map_city mc on mp.id = mc.pid where mc.id = #{mid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectProvinceCityByPublicNumberId3" resultType="java.util.Map" parameterType="java.util.Map" >
+	select mp.name province,mc.name city 
+	  from hl_substation hsu 
+	  left join map_city mc 
+	    on hsu.mid = mc.id 
+	  left join map_province mp 
+	    on mc.pid = mp.id 
+	 where mc.id = #{mid,jdbcType=VARCHAR}
+	   and hsu.wechat_official_accounts_id = #{publicnumberid,jdbcType=VARCHAR} 
+  </select>
+  
+  <select id="selectCountyList" resultType="java.util.Map" parameterType="java.lang.Integer" >
+	select mc.id,mc.name county from map_county mc where cid = #{cid,jdbcType=VARCHAR} 
+  </select>
+
+	<!-- @author liuyang @description 通过公众号id获取分站id和分站全拼-->
+	<select id="getHsIdAndHsSpellByWechatOfficialAccountsId" resultType="java.util.Map" parameterType="java.lang.String" >
+		select id substationId,spell substationNameSpell from hl_substation where wechat_official_accounts_id = #{wechatOfficialAccountsId,jdbcType=VARCHAR}
+	</select>
+
+<!--   ###############################自定义sql结束#################################   -->
+  
+</mapper>

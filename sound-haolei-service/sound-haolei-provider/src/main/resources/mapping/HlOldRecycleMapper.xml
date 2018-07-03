@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sound.haolei.provider.dao.HlOldRecycleMapper" >
+  <resultMap id="BaseResultMap" type="com.sound.haolei.model.HlOldRecycle" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="product_Code" property="productCode" jdbcType="VARCHAR" />
+    <result column="product_Name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_Type" property="productType" jdbcType="VARCHAR" />
+    <result column="product_Img" property="productImg" jdbcType="VARCHAR" />
+    <result column="product_Attrs" property="productAttrs" jdbcType="VARCHAR" />
+    <result column="event_Code" property="eventCode" jdbcType="VARCHAR" />
+    <result column="order_No" property="orderNo" jdbcType="VARCHAR" />
+    <result column="order_Price" property="orderPrice" jdbcType="DECIMAL" />
+    <result column="order_Source" property="orderSource" jdbcType="INTEGER" />
+    <result column="order_Status" property="orderStatus" jdbcType="INTEGER" />
+    <result column="contacts" property="contacts" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="contact_Address" property="contactAddress" jdbcType="VARCHAR" />
+    <result column="trade_Type" property="tradeType" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="user_Id" property="userId" jdbcType="VARCHAR" />
+    <result column="partner_Id" property="partnerId" jdbcType="VARCHAR" />
+    <result column="sign" property="sign" jdbcType="VARCHAR" />
+    <result column="c_time" property="cTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, product_Code, product_Name, product_Type, product_Img, product_Attrs, event_Code, 
+    order_No, order_Price, order_Source, order_Status, contacts, mobile, contact_Address, 
+    trade_Type, remark, user_Id, partner_Id, sign, c_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from hl_old_recycle
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from hl_old_recycle
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sound.haolei.model.HlOldRecycle" >
+    insert into hl_old_recycle (id, product_Code, product_Name, 
+      product_Type, product_Img, product_Attrs, 
+      event_Code, order_No, order_Price, 
+      order_Source, order_Status, contacts, 
+      mobile, contact_Address, trade_Type, 
+      remark, user_Id, partner_Id, 
+      sign, c_time)
+    values (#{id,jdbcType=INTEGER}, #{productCode,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+      #{productType,jdbcType=VARCHAR}, #{productImg,jdbcType=VARCHAR}, #{productAttrs,jdbcType=VARCHAR}, 
+      #{eventCode,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, #{orderPrice,jdbcType=DECIMAL}, 
+      #{orderSource,jdbcType=INTEGER}, #{orderStatus,jdbcType=INTEGER}, #{contacts,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{contactAddress,jdbcType=VARCHAR}, #{tradeType,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{partnerId,jdbcType=VARCHAR}, 
+      #{sign,jdbcType=VARCHAR}, #{cTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sound.haolei.model.HlOldRecycle" >
+    insert into hl_old_recycle
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="productCode != null" >
+        product_Code,
+      </if>
+      <if test="productName != null" >
+        product_Name,
+      </if>
+      <if test="productType != null" >
+        product_Type,
+      </if>
+      <if test="productImg != null" >
+        product_Img,
+      </if>
+      <if test="productAttrs != null" >
+        product_Attrs,
+      </if>
+      <if test="eventCode != null" >
+        event_Code,
+      </if>
+      <if test="orderNo != null" >
+        order_No,
+      </if>
+      <if test="orderPrice != null" >
+        order_Price,
+      </if>
+      <if test="orderSource != null" >
+        order_Source,
+      </if>
+      <if test="orderStatus != null" >
+        order_Status,
+      </if>
+      <if test="contacts != null" >
+        contacts,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="contactAddress != null" >
+        contact_Address,
+      </if>
+      <if test="tradeType != null" >
+        trade_Type,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="userId != null" >
+        user_Id,
+      </if>
+      <if test="partnerId != null" >
+        partner_Id,
+      </if>
+      <if test="sign != null" >
+        sign,
+      </if>
+      <if test="cTime != null" >
+        c_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="productCode != null" >
+        #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productType != null" >
+        #{productType,jdbcType=VARCHAR},
+      </if>
+      <if test="productImg != null" >
+        #{productImg,jdbcType=VARCHAR},
+      </if>
+      <if test="productAttrs != null" >
+        #{productAttrs,jdbcType=VARCHAR},
+      </if>
+      <if test="eventCode != null" >
+        #{eventCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPrice != null" >
+        #{orderPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderSource != null" >
+        #{orderSource,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="contacts != null" >
+        #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="contactAddress != null" >
+        #{contactAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null" >
+        #{tradeType,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerId != null" >
+        #{partnerId,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="cTime != null" >
+        #{cTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sound.haolei.model.HlOldRecycle" >
+    update hl_old_recycle
+    <set >
+      <if test="productCode != null" >
+        product_Code = #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        product_Name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productType != null" >
+        product_Type = #{productType,jdbcType=VARCHAR},
+      </if>
+      <if test="productImg != null" >
+        product_Img = #{productImg,jdbcType=VARCHAR},
+      </if>
+      <if test="productAttrs != null" >
+        product_Attrs = #{productAttrs,jdbcType=VARCHAR},
+      </if>
+      <if test="eventCode != null" >
+        event_Code = #{eventCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        order_No = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPrice != null" >
+        order_Price = #{orderPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderSource != null" >
+        order_Source = #{orderSource,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null" >
+        order_Status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="contacts != null" >
+        contacts = #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="contactAddress != null" >
+        contact_Address = #{contactAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null" >
+        trade_Type = #{tradeType,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_Id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerId != null" >
+        partner_Id = #{partnerId,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="cTime != null" >
+        c_time = #{cTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sound.haolei.model.HlOldRecycle" >
+    update hl_old_recycle
+    set product_Code = #{productCode,jdbcType=VARCHAR},
+      product_Name = #{productName,jdbcType=VARCHAR},
+      product_Type = #{productType,jdbcType=VARCHAR},
+      product_Img = #{productImg,jdbcType=VARCHAR},
+      product_Attrs = #{productAttrs,jdbcType=VARCHAR},
+      event_Code = #{eventCode,jdbcType=VARCHAR},
+      order_No = #{orderNo,jdbcType=VARCHAR},
+      order_Price = #{orderPrice,jdbcType=DECIMAL},
+      order_Source = #{orderSource,jdbcType=INTEGER},
+      order_Status = #{orderStatus,jdbcType=INTEGER},
+      contacts = #{contacts,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      contact_Address = #{contactAddress,jdbcType=VARCHAR},
+      trade_Type = #{tradeType,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      user_Id = #{userId,jdbcType=VARCHAR},
+      partner_Id = #{partnerId,jdbcType=VARCHAR},
+      sign = #{sign,jdbcType=VARCHAR},
+      c_time = #{cTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+<!--   自定义开始 -->
+<!-- 	根据订单号更新状态或者其他字段 -->
+	<update id="updateByCondition" parameterType="com.sound.haolei.model.HlOldRecycle" >
+    update hl_old_recycle
+    <set >
+      <if test="productCode != null" >
+        product_Code = #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        product_Name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productType != null" >
+        product_Type = #{productType,jdbcType=VARCHAR},
+      </if>
+      <if test="productImg != null" >
+        product_Img = #{productImg,jdbcType=VARCHAR},
+      </if>
+      <if test="productAttrs != null" >
+        product_Attrs = #{productAttrs,jdbcType=VARCHAR},
+      </if>
+      <if test="eventCode != null" >
+        event_Code = #{eventCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPrice != null" >
+        order_Price = #{orderPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderSource != null" >
+        order_Source = #{orderSource,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null" >
+        order_Status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="contacts != null" >
+        contacts = #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="contactAddress != null" >
+        contact_Address = #{contactAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null" >
+        trade_Type = #{tradeType,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_Id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerId != null" >
+        partner_Id = #{partnerId,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="cTime != null" >
+        c_time = #{cTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where 
+    	
+      <if test="orderNo != null" >
+        order_No = #{orderNo,jdbcType=VARCHAR}
+      </if>
+    
+  </update>
+
+	
+  
+  
+<!-- 	分页查询 -->
+	<select id="queryOldRecyclePage" resultMap="BaseResultMap" parameterType="java.util.Map">
+  
+  	SELECT
+		<include refid="Base_Column_List" />
+		FROM
+	hl_old_recycle
+  	where 1=1 
+  	
+  	<if test="status != null">
+		and order_Status = #{status}
+	</if>
+  	<if test="tradeType != null">
+		and trade_type = #{tradeType}
+	</if>
+  	<if test="productType != null">
+		and product_type = #{productType}
+	</if>
+  	<if test="phoneNum != null">
+		and mobile = #{phoneNum}
+	</if>
+	
+	<if test="startDate != null">
+		and c_time &gt;= #{startDate}
+	</if>
+	<if test="endDate != null">
+		and c_time &lt;= #{endDate}
+	</if>
+	<include refid="com.sound.haolei.dao.BaseMapper.continueQuery"/>
+    	order by id desc
+    <include refid="com.sound.haolei.dao.BaseMapper.limit"/>
+  </select>
+
+
+  
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="java.util.Map">
+  
+  	SELECT
+		<include refid="Base_Column_List" />
+		FROM
+	hl_old_recycle
+  	where 1=1 
+  	
+  	<if test="orderNo != null">
+		and order_no = #{orderNo}
+	</if>
+  </select>
+  
+
+<!--   自定义结束 -->
+  
+  
+</mapper>

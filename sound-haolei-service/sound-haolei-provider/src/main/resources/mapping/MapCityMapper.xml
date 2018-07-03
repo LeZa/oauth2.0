@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sound.haolei.provider.dao.MapCityMapper" >
+  <resultMap id="BaseResultMap" type="com.sound.haolei.model.MapCity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="letter" property="letter" jdbcType="VARCHAR" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, letter, pid, ctime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from map_city
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from map_city
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sound.haolei.model.MapCity" >
+    insert into map_city (id, name, letter, 
+      pid, ctime)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{letter,jdbcType=VARCHAR}, 
+      #{pid,jdbcType=INTEGER}, #{ctime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sound.haolei.model.MapCity" >
+    insert into map_city
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="letter != null" >
+        letter,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="ctime != null" >
+        ctime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="letter != null" >
+        #{letter,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sound.haolei.model.MapCity" >
+    update map_city
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="letter != null" >
+        letter = #{letter,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="ctime != null" >
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sound.haolei.model.MapCity" >
+    update map_city
+    set name = #{name,jdbcType=VARCHAR},
+      letter = #{letter,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=INTEGER},
+      ctime = #{ctime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+  <!-- ********************************自定义************************************** -->
+  <select id="selectByCondition" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from map_city
+    where 1=1
+    <include refid="where"/>
+  </select>
+  
+  <!-- %%%%%%%%%%%%%%%%%%%%%% 自定义 %%%%%%%%%%%%%%%%%%%%%%%%% -->
+  <!-- 批量删除城市信息 -->
+  <delete id="batchDelete" parameterType="java.util.List">
+	delete from map_city where id in
+	<foreach collection="list" index="index" item="item" open="(" separator="," close=")">     
+       ${item}     
+    </foreach> 
+  </delete>
+  <!-- 查询所有城市信息  -->
+  <select id="selectAll" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from map_city
+  </select>
+  
+  <!--@Description根据城市名称模糊查询城市id @author sushile  -->
+  <select id="selectByLikeName" parameterType="java.lang.String" resultMap="BaseResultMap">
+  		select 
+  				<include refid="Base_Column_List" />
+  					from map_city where name  like CONCAT(CONCAT('%', #{name,jdbcType=VARCHAR}), '%') limit 1
+  </select>
+  
+  
+  
+  
+  <sql id="where">
+  	<if test="id != null and id != -1">
+  		and id = #{id}
+  	</if>
+  	<if test="name != null and name != ''">
+  		and name like CONCAT(CONCAT('%', #{name,jdbcType=VARCHAR}), '%')
+  	</if>
+  	<if test="pid != null and pid != -1">
+  		and pid = #{pid}
+  	</if>
+  </sql>
+  
+  <!-- 根据省份城市名称查询 -->
+  <select id="selectByProvinceNameAndCityName" resultMap="BaseResultMap">
+  	select t.* from map_city t LEFT JOIN map_province p on t.pid=p.id 
+	where t.`name` like CONCAT(CONCAT(#{cityName,jdbcType=VARCHAR}), '%') and p.`name` like CONCAT(CONCAT(#{provinceName,jdbcType=VARCHAR}), '%')
+  </select>
+</mapper>

@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sound.haolei.provider.dao.HlUserMapper" >
+    <resultMap id="BaseResultMap" type="com.sound.haolei.model.HlUser" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+        <result column="passwd" jdbcType="VARCHAR" property="passwd" />
+        <result column="type" property="type" jdbcType="INTEGER" />
+        <result column="login_id" jdbcType="INTEGER" property="loginId" />
+        <result column="wx_openid" property="wxOpenid" jdbcType="VARCHAR" />
+        <result column="qq_openid" property="qqOpenid" jdbcType="VARCHAR" />
+        <result column="wb_openid" property="wbOpenid" jdbcType="VARCHAR" />
+        <result column="grade" property="grade" jdbcType="INTEGER" />
+        <result column="house_id" jdbcType="INTEGER" property="houseId" />
+        <result column="cash_points" property="cashPoints" jdbcType="INTEGER" />
+        <result column="level_points" property="levelPoints" jdbcType="INTEGER" />
+        <result column="image_path" property="imagePath" jdbcType="VARCHAR" />
+        <result column="image_path_big" property="imagePathBig" jdbcType="VARCHAR" />
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+        <result column="nick_name_rtime" property="nickNameRtime" jdbcType="BIGINT" />
+        <result column="nick_name_index" property="nickNameIndex" jdbcType="VARCHAR" />
+        <result column="realname" property="realname" jdbcType="VARCHAR" />
+        <result column="realname_rtime" property="realnameRtime" jdbcType="BIGINT" />
+        <result column="sex" property="sex" jdbcType="INTEGER" />
+        <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+        <result column="birthday_rtime" property="birthdayRtime" jdbcType="BIGINT" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="mcode" property="mcode" jdbcType="VARCHAR" />
+        <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+        <result column="cur_day_sms_login_count" jdbcType="INTEGER" property="curDaySmsLoginCount" />
+        <result column="ltime" property="ltime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+
+    <sql id="Base_Column_List" >
+        id, mobile, passwd, type, login_id, wx_openid, qq_openid, wb_openid, grade,house_id, cash_points, level_points,
+        image_path, image_path_big, nick_name, nick_name_rtime, nick_name_index, realname,
+        realname_rtime, sex, birthday, birthday_rtime, status, mcode, ctime, cur_day_sms_login_count,ltime
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from hl_user
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from hl_user
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.sound.haolei.model.HlUser" >
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        insert into hl_user (id, mobile, passwd, type,
+        login_id, wx_openid, qq_openid, wb_openid,
+        grade,house_id,cash_points, level_points,
+        image_path, image_path_big, nick_name,
+        nick_name_rtime, nick_name_index, realname,
+        realname_rtime, sex, birthday,
+        birthday_rtime, status, mcode,
+        ctime, cur_day_sms_login_count,ltime)
+        values (#{id,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR}, #{passwd,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
+        #{loginId,jdbcType=INTEGER}, #{wxOpenid,jdbcType=VARCHAR}, #{qqOpenid,jdbcType=VARCHAR}, #{wbOpenid,jdbcType=VARCHAR},
+        #{grade,jdbcType=INTEGER}, #{houseId,jdbcType=INTEGER}, #{cashPoints,jdbcType=INTEGER}, #{levelPoints,jdbcType=INTEGER},
+        #{imagePath,jdbcType=VARCHAR}, #{imagePathBig,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR},
+        #{nickNameRtime,jdbcType=BIGINT}, #{nickNameIndex,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR},
+        #{realnameRtime,jdbcType=BIGINT}, #{sex,jdbcType=INTEGER}, #{birthday,jdbcType=TIMESTAMP},
+        #{birthdayRtime,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{mcode,jdbcType=VARCHAR},
+        #{ctime,jdbcType=TIMESTAMP},  #{curDaySmsLoginCount,jdbcType=INTEGER}, #{ltime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.sound.haolei.model.HlUser" >
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        insert into hl_user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="mobile != null" >
+                mobile,
+            </if>
+            <if test="passwd != null">
+                passwd,
+            </if>
+            <if test="type != null" >
+                type,
+            </if>
+            <if test="loginId != null">
+                login_id,
+            </if>
+            <if test="wxOpenid != null" >
+                wx_openid,
+            </if>
+            <if test="qqOpenid != null" >
+                qq_openid,
+            </if>
+            <if test="wbOpenid != null" >
+                wb_openid,
+            </if>
+            <if test="grade != null" >
+                grade,
+            </if>
+            <if test="houseId != null">
+                house_id,
+            </if>
+            <if test="cashPoints != null">
+                cash_points,
+            </if>
+            <if test="levelPoints != null" >
+                level_points,
+            </if>
+            <if test="imagePath != null" >
+                image_path,
+            </if>
+            <if test="imagePathBig != null" >
+                image_path_big,
+            </if>
+            <if test="nickName != null" >
+                nick_name,
+            </if>
+            <if test="nickNameRtime != null" >
+                nick_name_rtime,
+            </if>
+            <if test="nickNameIndex != null" >
+                nick_name_index,
+            </if>
+            <if test="realname != null" >
+                realname,
+            </if>
+            <if test="realnameRtime != null" >
+                realname_rtime,
+            </if>
+            <if test="sex != null" >
+                sex,
+            </if>
+            <if test="birthday != null" >
+                birthday,
+            </if>
+            <if test="birthdayRtime != null" >
+                birthday_rtime,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="mcode != null" >
+                mcode,
+            </if>
+            <if test="ctime != null" >
+                ctime,
+            </if>
+            <if test="curDaySmsLoginCount != null">
+                cur_day_sms_login_count,
+            </if>
+            <if test="ltime != null">
+                ltime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="mobile != null" >
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="passwd != null">
+                #{passwd,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="loginId != null">
+                #{loginId,jdbcType=INTEGER},
+            </if>
+            <if test="wxOpenid != null" >
+                #{wxOpenid,jdbcType=VARCHAR},
+            </if>
+            <if test="qqOpenid != null" >
+                #{qqOpenid,jdbcType=VARCHAR},
+            </if>
+            <if test="wbOpenid != null" >
+                #{wbOpenid,jdbcType=VARCHAR},
+            </if>
+            <if test="grade != null" >
+                #{grade,jdbcType=INTEGER},
+            </if>
+            <if test="houseId != null">
+                #{houseId,jdbcType=INTEGER},
+            </if>
+            <if test="cashPoints != null">
+                #{cashPoints,jdbcType=INTEGER},
+            </if>
+            <if test="levelPoints != null" >
+                #{levelPoints,jdbcType=INTEGER},
+            </if>
+            <if test="imagePath != null" >
+                #{imagePath,jdbcType=VARCHAR},
+            </if>
+            <if test="imagePathBig != null" >
+                #{imagePathBig,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null" >
+                #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="nickNameRtime != null" >
+                #{nickNameRtime,jdbcType=BIGINT},
+            </if>
+            <if test="nickNameIndex != null" >
+                #{nickNameIndex,jdbcType=VARCHAR},
+            </if>
+            <if test="realname != null" >
+                #{realname,jdbcType=VARCHAR},
+            </if>
+            <if test="realnameRtime != null" >
+                #{realnameRtime,jdbcType=BIGINT},
+            </if>
+            <if test="sex != null" >
+                #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="birthday != null" >
+                #{birthday,jdbcType=TIMESTAMP},
+            </if>
+            <if test="birthdayRtime != null" >
+                #{birthdayRtime,jdbcType=BIGINT},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="mcode != null" >
+                #{mcode,jdbcType=VARCHAR},
+            </if>
+            <if test="ctime != null" >
+                #{ctime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="curDaySmsLoginCount != null">
+                #{curDaySmsLoginCount,jdbcType=INTEGER},
+            </if>
+            <if test="ltime != null">
+                #{ltime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.sound.haolei.model.HlUser" >
+        update hl_user
+        <set >
+            <if test="mobile != null" >
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="passwd != null">
+                passwd = #{passwd,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="loginId != null">
+                login_id = #{loginId,jdbcType=INTEGER},
+            </if>
+            <if test="wxOpenid != null" >
+                wx_openid = #{wxOpenid,jdbcType=VARCHAR},
+            </if>
+            <if test="qqOpenid != null" >
+                qq_openid = #{qqOpenid,jdbcType=VARCHAR},
+            </if>
+            <if test="wbOpenid != null" >
+                wb_openid = #{wbOpenid,jdbcType=VARCHAR},
+            </if>
+            <if test="grade != null" >
+                grade = #{grade,jdbcType=INTEGER},
+            </if>
+            <if test="houseId != null">
+                house_id = #{houseId,jdbcType=INTEGER},
+            </if>
+            <if test="cashPoints != null">
+                cash_points = #{cashPoints,jdbcType=INTEGER},
+            </if>
+            <if test="levelPoints != null" >
+                level_points = #{levelPoints,jdbcType=INTEGER},
+            </if>
+            <if test="imagePath != null" >
+                image_path = #{imagePath,jdbcType=VARCHAR},
+            </if>
+            <if test="imagePathBig != null" >
+                image_path_big = #{imagePathBig,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null" >
+                nick_name = #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="nickNameRtime != null" >
+                nick_name_rtime = #{nickNameRtime,jdbcType=BIGINT},
+            </if>
+            <if test="nickNameIndex != null" >
+                nick_name_index = #{nickNameIndex,jdbcType=VARCHAR},
+            </if>
+            <if test="realname != null" >
+                realname = #{realname,jdbcType=VARCHAR},
+            </if>
+            <if test="realnameRtime != null" >
+                realname_rtime = #{realnameRtime,jdbcType=BIGINT},
+            </if>
+            <if test="sex != null" >
+                sex = #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="birthday != null" >
+                birthday = #{birthday,jdbcType=TIMESTAMP},
+            </if>
+            <if test="birthdayRtime != null" >
+                birthday_rtime = #{birthdayRtime,jdbcType=BIGINT},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="mcode != null" >
+                mcode = #{mcode,jdbcType=VARCHAR},
+            </if>
+            <if test="ctime != null" >
+                ctime = #{ctime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="curDaySmsLoginCount != null">
+                cur_day_sms_login_count = #{curDaySmsLoginCount,jdbcType=INTEGER},
+            </if>
+            <if test="ltime != null">
+                ltime = #{ltime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.sound.haolei.model.HlUser" >
+        update hl_user
+        set mobile = #{mobile,jdbcType=VARCHAR},
+        passwd = #{passwd,jdbcType=VARCHAR},
+        type = #{type,jdbcType=INTEGER},
+        login_id = #{loginId,jdbcType=INTEGER},
+        wx_openid = #{wxOpenid,jdbcType=VARCHAR},
+        qq_openid = #{qqOpenid,jdbcType=VARCHAR},
+        wb_openid = #{wbOpenid,jdbcType=VARCHAR},
+        grade = #{grade,jdbcType=INTEGER},
+        house_id = #{houseId,jdbcType=INTEGER},
+        cash_points = #{cashPoints,jdbcType=INTEGER},
+        level_points = #{levelPoints,jdbcType=INTEGER},
+        image_path = #{imagePath,jdbcType=VARCHAR},
+        image_path_big = #{imagePathBig,jdbcType=VARCHAR},
+        nick_name = #{nickName,jdbcType=VARCHAR},
+        nick_name_rtime = #{nickNameRtime,jdbcType=BIGINT},
+        nick_name_index = #{nickNameIndex,jdbcType=VARCHAR},
+        realname = #{realname,jdbcType=VARCHAR},
+        realname_rtime = #{realnameRtime,jdbcType=BIGINT},
+        sex = #{sex,jdbcType=INTEGER},
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+        birthday_rtime = #{birthdayRtime,jdbcType=BIGINT},
+        status = #{status,jdbcType=INTEGER},
+        mcode = #{mcode,jdbcType=VARCHAR},
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+        cur_day_sms_login_count = #{curDaySmsLoginCount,jdbcType=INTEGER},
+        ltime = #{ltime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!-- 根据条件查询 -->
+    <select id="selectByCondition" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from hl_user
+        <trim prefix="where" prefixOverrides="and |or">
+            <if test="mobile != null and mobile != ''" >
+                AND mobile = #{mobile,jdbcType=VARCHAR}
+            </if>
+            <if test="passwd != null and passwd != ''" >
+                AND passwd = #{passwd,jdbcType=VARCHAR}
+            </if>
+            <if test="type != null" >
+                AND  type = #{type,jdbcType=INTEGER}
+            </if>
+            <if test="wxOpenid != null and wxOpenid != ''" >
+                AND wx_openid = #{wxOpenid,jdbcType=VARCHAR}
+            </if>
+            <if test="qqOpenid !=null and qqOpenid != ''" >
+                AND  qq_openid = #{qqOpenid,jdbcType=VARCHAR}
+            </if>
+            <if test="wbOpenid != null and wbOpenid != ''"  >
+                AND  wb_openid = #{wbOpenid,jdbcType=VARCHAR}
+            </if>
+            <if test="grade != null" >
+                AND  grade = #{grade,jdbcType=INTEGER}
+            </if>
+            <if test="cashPoints != null" >
+                AND cash_points = #{cashPoints,jdbcType=INTEGER}
+            </if>
+            <if test="levelPoints != null" >
+                AND level_points = #{levelPoints,jdbcType=INTEGER}
+            </if>
+            <if test="imagePath != null and imagePath != ''" >
+                AND image_path = #{imagePath,jdbcType=VARCHAR}
+            </if>
+            <if test="imagePathBig != null and imagePathBig != ''" >
+                AND image_path_big = #{imagePathBig,jdbcType=VARCHAR}
+            </if>
+            <if test="nickName != null and nickName != ''" >
+                and nick_name like CONCAT(CONCAT('%', #{nickName,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="nickNameRtime != null" >
+                AND nick_name_rtime = #{nickNameRtime,jdbcType=BIGINT}
+            </if>
+            <if test="nickNameIndex != null" >
+                AND nick_name_index = #{nickNameIndex,jdbcType=VARCHAR}
+            </if>
+            <if test="realname != null" >
+                and realname like CONCAT(CONCAT('%', #{realname,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="realnameRtime != null" >
+                AND realname_rtime = #{realnameRtime,jdbcType=BIGINT}
+            </if>
+            <if test="sex != null" >
+                AND sex = #{sex,jdbcType=INTEGER}
+            </if>
+            <if test="birthday != null" >
+                AND birthday = #{birthday,jdbcType=TIMESTAMP}
+            </if>
+            <if test="birthdayRtime != null" >
+                AND birthday_rtime = #{birthdayRtime,jdbcType=BIGINT}
+            </if>
+            <if test="status != null" >
+                AND status = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="mcode != null" >
+                AND mcode = #{mcode,jdbcType=VARCHAR}
+            </if>
+            <if test="ctime != null" >
+                AND ctime = #{ctime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="ltime != null" >
+                AND ltime = #{ltime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="loginId != null" >
+                AND login_id = #{loginId,jdbcType=INTEGER}
+            </if>
+        </trim>
+        <if test="orderby != null and orderby !=''">
+            order by ctime ${orderby}
+        </if>
+    </select>
+
+    <!-- 自定义 -->
+
+    <!-- 根据昵称密码查找用户 -->
+    <select id="selectByNicknamePwd" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from hl_user
+        where nick_name = #{nickname} and passwd = #{passwd}
+    </select>
+
+    <!-- 更新用户积分 -->
+    <update id="updateUserIntegral" parameterType="java.util.Map">
+        UPDATE hl_user SET level_points = ( level_points + #{addPoint}),cash_points=(cash_points + #{cashPoint}) where id = #{userId}
+    </update>
+
+    <!-- 根据手机号查询 -->
+    <select id="selectByMobile" parameterType="java.lang.String"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from hl_user
+        where mobile = #{mobile}
+    </select>
+
+    <!-- 验证登陆 -->
+    <select id="selectLoginByPassword" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from hl_user
+        where mobile = #{mobile} and passwd=#{password}
+    </select>
+
+    <!-- 查询微信用户 -->
+    <select id="selectByWechatOpenid" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from hl_user
+        where wx_openid=#{openid}
+    </select>
+    <!-- 查询微信用户根据手机号和微信openid -->
+    <select id="selectUserByOpenIdAndMobile" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from hl_user
+        where wx_openid=#{wxOpenid} and mobile = #{mobile}
+    </select>
+
+    <!-- 查询未同步到云平台的用户数据 -->
+    <select id="selectToCloudByLastId" resultType="java.util.Map">
+        select t.id,t.mobile,t.ctime from hl_user t where t.mobile is not null and t.id > #{lastId}
+        order by id asc
+        limit 1000
+    </select>
+    <!-- 云平台发送失败的用户数据 -->
+    <select id="selectUserByIdInList" resultType="java.util.Map">
+        select t.id,t.mobile,t.ctime from hl_user t where t.mobile is not null and t.id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        order by id asc
+    </select>
+    <!-- 获取loginId最大值 -->
+    <select id="getMaxLoginId" resultType="java.lang.Integer">
+        SELECT MAX(login_id) FROM `hl_user`;
+    </select>
+
+
+    <!-- 根据用户昵称查询用户 -->
+    <select id="selectByNickname" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from hl_user
+        where nick_name = #{nickName}
+    </select>
+
+    <update id="addLevelPoint">
+        UPDATE
+        hl_user
+        SET level_points = (level_points + #{num})
+        WHERE
+        id = #{uid}
+        and level_points = #{currentPoints}
+
+    </update>
+
+
+    <!--@Description 查询所有的用户信息 @author sushile  -->
+    <select id="selectAll" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from hl_user
+    </select>
+
+    <!-- @Description 后台管理查询总条数  @author sushile-->
+    <select id="queryCount" resultType="java.lang.Long" parameterType="java.util.Map">
+        select
+        count(1)
+        from
+        hl_user r
+        <include refid="where"/>
+    </select>
+    <!-- @Description 后台管理查询总条数  @author sushile-->
+    <!-- @Description 后台管理分页查询   @author sushile-->
+    <select id="queryPageResult" resultType="java.util.Map" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List" />
+        from
+        hl_user r
+        <include refid="where"/>
+        <include refid="orderby"/>
+        <include refid="limit"/>
+    </select>
+
+    <!-- 根据id更新status状态 -->
+    <update id="updateStatusById">
+        update hl_user set status=#{status} where id=#{id}
+    </update>
+    <sql id="where">
+        <where>
+            <if test="mobile != null and mobile != ''">
+                r.mobile like CONCAT(CONCAT('%', #{mobile}), '%')
+            </if>
+            <if test="type != null and type != 2 ">
+                and r.status=#{type}
+            </if>
+            <if test="nickName != null and nickName != ''">
+                and  r.nick_name like CONCAT(CONCAT('%', #{nickName}), '%')
+            </if>
+            <if test="realName != null and realName != ''">
+                and r.realname  like CONCAT(CONCAT('%', #{realName}), '%')
+            </if>
+            <if test="sex != null and sex != ''">
+                and r.sex=${sex}
+            </if>
+            <if test="cSartTime != null and cSartTime != ''">
+                and ctime &gt;= #{cSartTime}
+            </if>
+            <if test="cEndTime != null and cEndTime != ''">
+                and ctime &lt;= #{cEndTime}
+            </if>
+        </where>
+
+    </sql>
+
+    <sql id="orderby">
+        <if test="orderStr != null and orderStr != ''" >
+            order by ${orderStr}
+        </if>
+    </sql>
+    <!-- @Description 后台管理分页查询   @author sushile-->
+    <!-- 分页限制 -->
+    <sql id="limit">
+        <if test="curRow!=null and limitSize!='' ">limit #{curRow},#{limitSize}</if>
+    </sql>
+
+    <select id="slelectUserHsTrack" parameterType="java.util.Map" resultType="java.util.Map">
+        select id ,realname ,hstype ,cuser ,pay_type ,pay_num ,buy_time from
+        (select
+        hu.id,
+        hu.realname,
+        hstype,
+        hs.cuser,
+        hs.pay_type,
+        hs.pay_num,
+        hs.buy_time
+        from hl_user hu
+        left join
+        (select '0' as hstype ,ha.cuser ,ha.pay_type ,ha.pay_num, ha.buy_time from hs_appointment ha
+        union all
+        select '1' as hstype ,hht.user_id ,hht.pay_type ,hht.pay_num ,hht.dotime from hl_house_track hht
+        union all
+        select '2' as hstype ,hpt.user_id ,hpt.type ,hpt.points ,hpt.ctime from hl_points_track hpt
+        where description in
+        ('联运回收机使用送乐豆','电子称使用送乐豆','浪尖回收机使用送乐豆'))hs
+        ON hu.id=hs.cuser ) hu_hs
+        where cuser = #{userid ,jdbcType=INTEGER}
+        <if test="hstype!=null and hstype!=''">
+            and hstype = #{hstype,jdbcType=VARCHAR}
+        </if>
+        <if test="startTime != null and startTime != ''">
+            and buy_time &gt;= #{startTime}
+        </if>
+        <if test="endTime != null and endTime != ''">
+            and buy_time &lt;= #{endTime}
+        </if>
+        <include refid="orderby"/>
+        <include refid="limit"/>
+    </select>
+    <select id="selectUserHsCount" resultType="java.lang.Long" parameterType="java.util.Map">
+        select
+        count(1)
+        from
+        (select
+        hu.id,
+        hu.realname,
+        hstype,
+        hs.cuser,
+        hs.pay_type,
+        hs.pay_num,
+        hs.buy_time
+        from hl_user hu
+        left join
+        (select '0' as hstype ,ha.cuser ,ha.pay_type ,ha.pay_num, ha.buy_time from hs_appointment ha
+        union all
+        select '1' as hstype ,hht.user_id ,hht.pay_type ,hht.pay_num ,hht.dotime from hl_house_track hht
+        union all
+        select '2' as hstype ,hpt.user_id ,hpt.type ,hpt.points ,hpt.ctime from hl_points_track hpt
+        where description in
+        ('联运回收机使用送乐豆','电子称使用送乐豆','浪尖回收机使用送乐豆'))hs
+        ON hu.id=hs.cuser ) hu_hs
+        where cuser = #{userid ,jdbcType=INTEGER}
+        <if test="hstype!=null and hstype!=''">
+            and hstype = #{hstype,jdbcType=VARCHAR}
+        </if>
+        <if test="startTime != null and startTime != ''">
+            and buy_time &gt;= #{startTime}
+        </if>
+        <if test="endTime != null and endTime != ''">
+            and buy_time &lt;= #{endTime}
+        </if>
+    </select>
+    <!-- 查询当天验证码登录次数 wangyonghui 2017年9月1日 14:27:24 -->
+    <select id="selectCurDaySmsLoginCount" resultType="java.lang.Integer" >
+        SELECT
+        cur_day_sms_login_count
+        FROM
+        hl_user
+        WHERE
+        date(ltime) = CURDATE()
+        AND mobile = #{mobile};
+    </select>
+    <!-- 查询用户所在小区分站名称全拼 wangyonghui 2017年9月1日 14:27:24 -->
+    <select id="selectUserHouseSubstationNameSpell" resultType="java.lang.String" >
+        SELECT
+        substation.spell
+        FROM
+        hl_substation AS substation
+        WHERE
+        substation.id = (
+        SELECT
+        housestation.substation_id
+        FROM
+        hl_house_substation AS housestation
+        WHERE
+        housestation.id = #{houseId}
+        )
+    </select>
+    <!-- 查询用户所在小区名称 wangyonghui 2017年9月1日 14:27:24 -->
+    <select id="selectUserHouseName" resultType="java.lang.String" >
+        SELECT
+        area
+        FROM
+        hl_house${substationNameSpell}
+        WHERE
+        id = #{houseId}
+    </select>
+    <!-- 根据用户Id解绑微信openId -->
+    <update id="unbundleWxOpenId" parameterType="java.lang.Integer">
+        update hl_user set wx_openid = null where id = #{userId}
+    </update>
+</mapper>

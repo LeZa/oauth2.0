@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sound.haolei.provider.dao.HsMachineLianyunMapper" >
+  <resultMap id="BaseResultMap" type="com.sound.haolei.model.HsMachineLianyun" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="mchid" property="mchid" jdbcType="VARCHAR" />
+    <result column="house_id" property="houseId" jdbcType="INTEGER" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="province_id" property="provinceId" jdbcType="INTEGER" />
+    <result column="city_id" property="cityId" jdbcType="INTEGER" />
+    <result column="county_id" property="countyId" jdbcType="INTEGER" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="pot_x" property="potX" jdbcType="VARCHAR" />
+    <result column="pot_y" property="potY" jdbcType="VARCHAR" />
+    <result column="weight1" property="weight1" jdbcType="INTEGER" />
+    <result column="weight2" property="weight2" jdbcType="INTEGER" />
+    <result column="weight3" property="weight3" jdbcType="INTEGER" />
+    <result column="weight4" property="weight4" jdbcType="INTEGER" />
+    <result column="weight5" property="weight5" jdbcType="INTEGER" />
+    <result column="weight6" property="weight6" jdbcType="INTEGER" />
+    <result column="weight7" property="weight7" jdbcType="INTEGER" />
+    <result column="weight8" property="weight8" jdbcType="INTEGER" />
+    <result column="weight9" property="weight9" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="use_number" property="useNumber" jdbcType="BIGINT" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+    <result column="ltime" property="ltime" jdbcType="TIMESTAMP" />
+    <result column="cuid" property="cuid" jdbcType="INTEGER" />
+    <result column="luid" property="luid" jdbcType="INTEGER" />
+    <result column="last_online_time" property="lastOnlineTime" jdbcType="TIMESTAMP" />
+    <result column="last_pos_time" property="lastPosTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, mchid, house_id, nickname, province_id, city_id, county_id, area, address, pot_x, 
+    pot_y, weight1, weight2, weight3, weight4, weight5, weight6, weight7, weight8, weight9, 
+    description, use_number, ctime, ltime, cuid, luid, last_online_time, last_pos_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from hs_machine_lianyun${substationNameSpell}
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from hs_machine_lianyun${substationNameSpell}
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sound.haolei.model.HsMachineLianyun" >
+    insert into hs_machine_lianyun${substationNameSpell} (id, mchid, house_id, 
+      nickname, province_id, city_id, 
+      county_id, area, address, 
+      pot_x, pot_y, weight1, 
+      weight2, weight3, weight4, 
+      weight5, weight6, weight7, 
+      weight8, weight9, description, 
+      use_number, ctime, ltime, 
+      cuid, luid, last_online_time, 
+      last_pos_time)
+    values (#{id,jdbcType=INTEGER}, #{mchid,jdbcType=VARCHAR}, #{houseId,jdbcType=INTEGER}, 
+      #{nickname,jdbcType=VARCHAR}, #{provinceId,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER}, 
+      #{countyId,jdbcType=INTEGER}, #{area,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{potX,jdbcType=VARCHAR}, #{potY,jdbcType=VARCHAR}, #{weight1,jdbcType=INTEGER}, 
+      #{weight2,jdbcType=INTEGER}, #{weight3,jdbcType=INTEGER}, #{weight4,jdbcType=INTEGER}, 
+      #{weight5,jdbcType=INTEGER}, #{weight6,jdbcType=INTEGER}, #{weight7,jdbcType=INTEGER}, 
+      #{weight8,jdbcType=INTEGER}, #{weight9,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, 
+      #{useNumber,jdbcType=BIGINT}, #{ctime,jdbcType=TIMESTAMP}, #{ltime,jdbcType=TIMESTAMP}, 
+      #{cuid,jdbcType=INTEGER}, #{luid,jdbcType=INTEGER}, #{lastOnlineTime,jdbcType=TIMESTAMP}, 
+      #{lastPosTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sound.haolei.model.HsMachineLianyun" >
+    insert into hs_machine_lianyun${substationNameSpell}
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mchid != null" >
+        mchid,
+      </if>
+      <if test="houseId != null" >
+        house_id,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="countyId != null" >
+        county_id,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="potX != null" >
+        pot_x,
+      </if>
+      <if test="potY != null" >
+        pot_y,
+      </if>
+      <if test="weight1 != null" >
+        weight1,
+      </if>
+      <if test="weight2 != null" >
+        weight2,
+      </if>
+      <if test="weight3 != null" >
+        weight3,
+      </if>
+      <if test="weight4 != null" >
+        weight4,
+      </if>
+      <if test="weight5 != null" >
+        weight5,
+      </if>
+      <if test="weight6 != null" >
+        weight6,
+      </if>
+      <if test="weight7 != null" >
+        weight7,
+      </if>
+      <if test="weight8 != null" >
+        weight8,
+      </if>
+      <if test="weight9 != null" >
+        weight9,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="useNumber != null" >
+        use_number,
+      </if>
+      <if test="ctime != null" >
+        ctime,
+      </if>
+      <if test="ltime != null" >
+        ltime,
+      </if>
+      <if test="cuid != null" >
+        cuid,
+      </if>
+      <if test="luid != null" >
+        luid,
+      </if>
+      <if test="lastOnlineTime != null" >
+        last_online_time,
+      </if>
+      <if test="lastPosTime != null" >
+        last_pos_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mchid != null" >
+        #{mchid,jdbcType=VARCHAR},
+      </if>
+      <if test="houseId != null" >
+        #{houseId,jdbcType=INTEGER},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="countyId != null" >
+        #{countyId,jdbcType=INTEGER},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="potX != null" >
+        #{potX,jdbcType=VARCHAR},
+      </if>
+      <if test="potY != null" >
+        #{potY,jdbcType=VARCHAR},
+      </if>
+      <if test="weight1 != null" >
+        #{weight1,jdbcType=INTEGER},
+      </if>
+      <if test="weight2 != null" >
+        #{weight2,jdbcType=INTEGER},
+      </if>
+      <if test="weight3 != null" >
+        #{weight3,jdbcType=INTEGER},
+      </if>
+      <if test="weight4 != null" >
+        #{weight4,jdbcType=INTEGER},
+      </if>
+      <if test="weight5 != null" >
+        #{weight5,jdbcType=INTEGER},
+      </if>
+      <if test="weight6 != null" >
+        #{weight6,jdbcType=INTEGER},
+      </if>
+      <if test="weight7 != null" >
+        #{weight7,jdbcType=INTEGER},
+      </if>
+      <if test="weight8 != null" >
+        #{weight8,jdbcType=INTEGER},
+      </if>
+      <if test="weight9 != null" >
+        #{weight9,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="useNumber != null" >
+        #{useNumber,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ltime != null" >
+        #{ltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cuid != null" >
+        #{cuid,jdbcType=INTEGER},
+      </if>
+      <if test="luid != null" >
+        #{luid,jdbcType=INTEGER},
+      </if>
+      <if test="lastOnlineTime != null" >
+        #{lastOnlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPosTime != null" >
+        #{lastPosTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sound.haolei.model.HsMachineLianyun" >
+    update hs_machine_lianyun${substationNameSpell}
+    <set >
+      <if test="mchid != null" >
+        mchid = #{mchid,jdbcType=VARCHAR},
+      </if>
+      <if test="houseId != null" >
+        house_id = #{houseId,jdbcType=INTEGER},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="countyId != null" >
+        county_id = #{countyId,jdbcType=INTEGER},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="potX != null" >
+        pot_x = #{potX,jdbcType=VARCHAR},
+      </if>
+      <if test="potY != null" >
+        pot_y = #{potY,jdbcType=VARCHAR},
+      </if>
+      <if test="weight1 != null" >
+        weight1 = #{weight1,jdbcType=INTEGER},
+      </if>
+      <if test="weight2 != null" >
+        weight2 = #{weight2,jdbcType=INTEGER},
+      </if>
+      <if test="weight3 != null" >
+        weight3 = #{weight3,jdbcType=INTEGER},
+      </if>
+      <if test="weight4 != null" >
+        weight4 = #{weight4,jdbcType=INTEGER},
+      </if>
+      <if test="weight5 != null" >
+        weight5 = #{weight5,jdbcType=INTEGER},
+      </if>
+      <if test="weight6 != null" >
+        weight6 = #{weight6,jdbcType=INTEGER},
+      </if>
+      <if test="weight7 != null" >
+        weight7 = #{weight7,jdbcType=INTEGER},
+      </if>
+      <if test="weight8 != null" >
+        weight8 = #{weight8,jdbcType=INTEGER},
+      </if>
+      <if test="weight9 != null" >
+        weight9 = #{weight9,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="useNumber != null" >
+        use_number = #{useNumber,jdbcType=BIGINT},
+      </if>
+      <if test="ctime != null" >
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ltime != null" >
+        ltime = #{ltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cuid != null" >
+        cuid = #{cuid,jdbcType=INTEGER},
+      </if>
+      <if test="luid != null" >
+        luid = #{luid,jdbcType=INTEGER},
+      </if>
+      <if test="lastOnlineTime != null" >
+        last_online_time = #{lastOnlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPosTime != null" >
+        last_pos_time = #{lastPosTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sound.haolei.model.HsMachineLianyun" >
+    update hs_machine_lianyun${substationNameSpell}
+    set mchid = #{mchid,jdbcType=VARCHAR},
+      house_id = #{houseId,jdbcType=INTEGER},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=INTEGER},
+      city_id = #{cityId,jdbcType=INTEGER},
+      county_id = #{countyId,jdbcType=INTEGER},
+      area = #{area,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      pot_x = #{potX,jdbcType=VARCHAR},
+      pot_y = #{potY,jdbcType=VARCHAR},
+      weight1 = #{weight1,jdbcType=INTEGER},
+      weight2 = #{weight2,jdbcType=INTEGER},
+      weight3 = #{weight3,jdbcType=INTEGER},
+      weight4 = #{weight4,jdbcType=INTEGER},
+      weight5 = #{weight5,jdbcType=INTEGER},
+      weight6 = #{weight6,jdbcType=INTEGER},
+      weight7 = #{weight7,jdbcType=INTEGER},
+      weight8 = #{weight8,jdbcType=INTEGER},
+      weight9 = #{weight9,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      use_number = #{useNumber,jdbcType=BIGINT},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      ltime = #{ltime,jdbcType=TIMESTAMP},
+      cuid = #{cuid,jdbcType=INTEGER},
+      luid = #{luid,jdbcType=INTEGER},
+      last_online_time = #{lastOnlineTime,jdbcType=TIMESTAMP},
+      last_pos_time = #{lastPosTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- **********************************************************************************自定义start************************************************************************************** -->
+  <!-- 根据机器码查询 -->
+  <select id="selectByMchid" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from hs_machine_lianyun${substationNameSpell}
+    where mchid = #{mchid}
+  </select>
+  
+  <!-- 全属性映射 -->
+ <!-- <resultMap type="com.sound.haolei.dto.core.HsMachineLianyunDto" id="FullInfoResultMap" extends="BaseResultMap">
+  	<association property="province" column="province_id" select="com.sound.haolei.dao.core.MapProvinceMapper.selectByPrimaryKey"/>
+  	<association property="city" column="city_id" select="com.sound.haolei.dao.core.MapCityMapper.selectByPrimaryKey"/>
+  	<association property="country" column="county_id" select="com.sound.haolei.dao.core.MapCountryMapper.selectByPrimaryKey"/>
+  </resultMap>-->
+  <!-- 查询回收机所有信息 -->
+  <!--<select id="selectFullInfoById" resultMap="FullInfoResultMap" parameterType="java.lang.Integer">
+ 	select
+	  	<include refid="Base_Column_List" />
+	from hs_machine_lianyun${substationNameSpell}
+	where id=#{id}
+  </select>-->
+  
+  <!-- 查询总条数 -->
+  <select id="queryCount" resultType="java.lang.Long" parameterType="java.util.Map">
+  	select
+  		count(1)
+  	from hs_machine_lianyun${substationNameSpell}
+  		where 1=1
+  	<include refid="where" />
+  </select>
+  <!-- 查询符合结果的数据 -->
+  <!--<select id="queryPageResult" resultMap="FullInfoResultMap" parameterType="java.util.Map">
+  	select 
+    <include refid="Base_Column_List" />
+    from hs_machine_lianyun${substationNameSpell}
+    where 1=1
+    <include refid="where"/>
+     <include refid="orderby"/>
+    <include refid="limit"/>
+  </select>-->
+  
+  <!-- 批量删除回收机 -->
+  <delete id="batchDelMachines" parameterType="java.util.List">
+	delete from hs_machine_lianyun${substationNameSpell} where id in
+	<foreach collection="list" index="index" item="item" open="(" separator="," close=")">     
+       ${item}     
+    </foreach> 
+  </delete>
+  
+  
+  
+  <sql id="where">
+  	<if test="mchId != null and mchId != ''">
+  		and mchId like CONCAT(CONCAT('%', #{mchId,jdbcType=VARCHAR}), '%')
+  	</if>
+  	<if test="provinceId != null and provinceId != -1">
+  		and province_id = #{provinceId}
+  	</if>
+  	<if test="cityId != null and cityId != -1">
+  		and city_id = #{cityId}
+  	</if>
+  	<if test="countryId != null and countryId != -1">
+  		and county_id = #{countryId}
+  	</if>
+  	<if test="weight != null ">
+  		and ${weight} 
+  	</if>
+  	<if test="zlstart != null">
+  	  	&gt;= ${zlstart}
+  	</if>
+  	<if test="zlend != null">
+  		and  ${weight} &lt;= ${zlend}
+  	</if>
+  	<!--   	20170605wrw增加昵称查询条件 -->
+  	
+  	<if test="nickname != null and nickname != ''">
+  		and nickname like CONCAT(CONCAT('%', #{nickname}), '%') 
+  	</if>
+  	
+  	<if test="ctimestart != null and ctimestart != ''">
+  		and ctime &gt;= #{ctimestart}
+  	</if>
+  	
+  	<if test="ctimeend != null and ctimeend != ''">
+  		and ctime &lt;= #{ctimeend}
+  	</if>
+  	
+  	
+  </sql>
+  <sql id="orderby">
+  		<if test="orderStr != null and orderStr != ''" >
+  			order by ctime desc
+  		</if>
+  </sql>
+  <!-- 分页限制 -->
+  <sql id="limit">
+  	<if test="curRow!=null and limitSize!='' ">limit #{curRow},#{limitSize}</if>
+  </sql>
+  
+  <!-- 查询当天更新的数据列表 -->
+  <select id="selectTodayUpdateData" resultMap="BaseResultMap" parameterType="java.util.Map">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from hs_machine_lianyun${substationNameSpell} t where TO_DAYS(t.ltime) = TO_DAYS(NOW()) || TO_DAYS(t.last_pos_time) = TO_DAYS(NOW())
+  </select>
+   <!-- 云平台推送数据查询 -->
+  <select id="selectMachineToCloud" resultType="java.util.Map">
+		  SELECT
+			t.mchid,
+			t.ctime,
+			t.nickname,
+			p.`name` AS province,
+			c.`name` AS city,
+			cn.`name` AS county,
+			t.pot_x AS potx,
+			t.pot_y AS poty,
+			t.address
+		FROM
+			hs_machine_lianyun${substationNameSpell} t
+		LEFT JOIN map_province p ON t.province_id = t.id
+		LEFT JOIN map_city c ON t.city_id = c.id
+		LEFT JOIN map_county cn ON t.county_id = cn.id
+		where t.mchid in
+  		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">  
+	 	 #{item}  
+	 	</foreach>  
+		ORDER BY
+			t.ctime ASC
+  </select>
+   <!-- 云平台更新数据推送数据查询 -->
+  <select id="selectUpdateMachineToCloud" resultType="java.util.Map">
+		  <!-- 
+		  按全量推送
+		  SELECT
+			t.mchid,
+			t.nickname,
+			t.pot_x AS potx,
+			t.pot_y AS poty,
+			t.weight1,
+			t.weight2,
+			t.weight3,
+			t.weight4,
+			t.weight5,
+			t.weight6,
+			t.weight7,
+			t.weight8,
+			t.weight9,
+			t.use_number AS useNumber,
+			t.ltime AS flushTime
+		FROM
+			hs_machine_lianyun t
+		where t.mchid in
+  		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">  
+	 	 #{item}  
+	 	</foreach>  
+		ORDER BY
+			t.ctime ASC -->
+		SELECT
+			t.mchid,
+			l.nickname,
+			l.pot_x AS potx,
+			l.pot_y AS poty,
+			t.type,
+			t.weight,
+			l.use_number AS useNumber,
+			t.ctime AS flushTime
+		FROM
+			hs_machine_lianyun_track t
+		LEFT JOIN hs_machine_lianyun${substationNameSpell} l ON t.mchid = l.mchid
+		WHERE l.mchid is not null and t.substation_id=${substationId} and 
+		t.mchid in
+  		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">  
+	 	 #{item}  
+	 	</foreach>
+	 	ORDER BY
+			t.ctime ASC
+  </select>
+  
+  <!-- 查询当天更新了的机器到云平台推送 -->
+  <select id="selectUpdatedMachineToCloud" parameterType="java.util.Map" resultType="java.util.Map">
+  	  <!-- SELECT
+			t.mchid,
+			t.nickname,
+			t.pot_x AS potx,
+			t.pot_y AS poty,
+			t.weight1,
+			t.weight2,
+			t.weight3,
+			t.weight4,
+			t.weight5,
+			t.weight6,
+			t.weight7,
+			t.weight8,
+			t.weight9,
+			t.use_number AS useNumber,
+			t.ltime AS flushTime
+		FROM
+			hs_machine_lianyun t
+	WHERE
+		t.ltime &gt; #{endtime}
+	ORDER BY
+		t.ctime ASC -->
+		SELECT
+			t.mchid,
+			l.nickname,
+			l.pot_x AS potx,
+			l.pot_y AS poty,
+			t.type,
+			t.weight,
+			l.use_number AS useNumber,
+			t.ctime AS flushTime
+		FROM
+			hs_machine_lianyun_track t
+		LEFT JOIN hs_machine_lianyun${substationNameSpell} l ON t.mchid = l.mchid
+		WHERE l.mchid is not null and 
+			t.ctime &gt; #{endtime} and t.substation_id=${substationId}
+		ORDER BY
+			t.ctime ASC
+  </select>
+  <!-- 查询当天新增的机器到云平台推送 -->
+  <select id="selectNewMachineToCloud" resultType="java.util.Map">
+  	SELECT
+		t.mchid,
+		t.ctime,
+		t.nickname,
+		p.`name` AS province,
+		c.`name` AS city,
+		cn.`name` AS county,
+		t.pot_x AS potx,
+		t.pot_y AS poty,
+		t.address
+	FROM
+		hs_machine_lianyun${substationNameSpell}  t
+	LEFT JOIN map_province p ON t.province_id = p.id
+	LEFT JOIN map_city c ON t.city_id = c.id
+	LEFT JOIN map_county cn ON t.county_id = cn.id
+	WHERE
+		TO_DAYS(t.ctime) = TO_DAYS(NOW())
+	ORDER BY
+		t.ctime ASC
+  </select>
+  <!-- **********************************************************************************自定义end**************************************************************************************** -->
+  
+  <!--   验证是否重复 -->
+  <select id="selectByMchidOrNickName" resultType="java.lang.Integer" parameterType="java.util.Map">
+  	select
+  		count(1)
+  	from hs_machine_lianyun${substationNameSpell}
+  		where 1=1
+  	<if test="mchid!=null">
+  		and mchid = #{mchid}
+  	</if>
+  	<if test="nickname!=null">
+  		and nickname = #{nickname}
+  	</if>
+  	<if test="id !=null">
+  		and id != #{id}
+  	</if>
+
+
+  </select>
+  
+  
+  
+  
+</mapper>

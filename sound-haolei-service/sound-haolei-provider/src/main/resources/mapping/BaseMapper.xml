@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sound.haolei.dao.BaseMapper" >
+	<!-- 继续查找,用于类似朋友圈更多信息的查找 -->
+  <sql id="continueQuery">
+  	<if test='currentId != null and currentId != "" and currentId != "0"'>
+        <if test="which != null and which != ''">
+            <if test="which == -1">
+                and id &lt; #{currentId}
+            </if>
+            <if test="which == 1">
+                and id &gt; #{currentId}
+            </if>
+        </if>
+    </if>
+  </sql>
+  <sql id="limit">
+  	<if test="size != null and size != ''">
+  		limit #{size}
+  	</if>
+  </sql>
+</mapper>

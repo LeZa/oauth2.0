@@ -1,0 +1,9 @@
+#配置文件用开发环境的配置文件application-dev.yml  
+spring:
+ profiles:
+   #本地环境
+   active: local
+   #测试环境
+#   active: dev
+   #生产环境
+#   active: product

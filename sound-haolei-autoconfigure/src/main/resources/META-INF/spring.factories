@@ -1,0 +1,7 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.sound.haolei.boot.dubbo.autoconfigure.DubboAutoConfiguration
+
+
+org.springframework.context.ApplicationListener=\
+com.sound.haolei.boot.dubbo.context.event.OverrideDubboConfigApplicationListener,\
+com.sound.haolei.boot.dubbo.context.event.WelcomeLogoApplicationListener

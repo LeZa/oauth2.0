@@ -1,0 +1,6 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.sound.haolei.boot.dubbo.actuate.autoconfigure.DubboEndpointAutoConfiguration,\
+com.sound.haolei.boot.dubbo.actuate.autoconfigure.DubboHealthIndicatorAutoConfiguration
+
+org.springframework.boot.actuate.autoconfigure.ManagementContextConfiguration=\
+com.sound.haolei.boot.dubbo.actuate.autoconfigure.DubboMvcEndpointManagementContextConfiguration

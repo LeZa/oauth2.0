@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sound.haolei.provider.dao.MapProvinceMapper" >
+  <resultMap id="BaseResultMap" type="com.sound.haolei.model.MapProvince" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="letter" property="letter" jdbcType="VARCHAR" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, letter, ctime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from map_province
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from map_province
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sound.haolei.model.MapProvince" >
+    insert into map_province (id, name, letter, 
+      ctime)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{letter,jdbcType=VARCHAR}, 
+      #{ctime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sound.haolei.model.MapProvince" >
+    insert into map_province
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="letter != null" >
+        letter,
+      </if>
+      <if test="ctime != null" >
+        ctime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="letter != null" >
+        #{letter,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sound.haolei.model.MapProvince" >
+    update map_province
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="letter != null" >
+        letter = #{letter,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sound.haolei.model.MapProvince" >
+    update map_province
+    set name = #{name,jdbcType=VARCHAR},
+      letter = #{letter,jdbcType=VARCHAR},
+      ctime = #{ctime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByCondition" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from map_province
+    where 1=1
+    <include refid="where"/>
+  </select>
+  <!-- %%%%%%%%%%%%%%%%%%%%%% 自定义 %%%%%%%%%%%%%%%%%%%%%%%%% -->
+  <!-- 查询所有省份信息  -->
+  <select id="selectAll" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from map_province
+  </select>
+  <!-- 批量删除省份信息 -->
+  <delete id="batchDelete" parameterType="java.util.List">
+	delete from map_province where id in
+	<foreach collection="list" index="index" item="item" open="(" separator="," close=")">     
+       ${item}     
+    </foreach> 
+  </delete>
+  <!--根据省份名称模糊查询省份信息  -->
+  <select id="selectByLikeName" parameterType="java.lang.String" resultMap="BaseResultMap">
+  		select 
+		<include refid="Base_Column_List" />
+		from map_province where name like CONCAT(CONCAT('%', #{name,jdbcType=VARCHAR}), '%') limit 1
+  </select>
+  
+  
+  
+  
+  <sql id="where">
+  	<if test="id != null and id != -1">
+  		and id = #{id}
+  	</if>
+  	<if test="name != null and name != ''">
+  		and name like CONCAT(CONCAT('%', #{name,jdbcType=VARCHAR}), '%')
+  	</if>
+  </sql>
+  
+  
+  
+  <!-- 导数据用的sql -->
+  <!-- <resultMap type="com.sound.haolei.core.Province" id="exportDataResultMap">
+    <result column="id" property="value" />
+    <result column="name" property="text" />
+    <collection property="children" ofType="com.sound.haolei.core.City"  select="selectCityExportData" column="id"/>
+  </resultMap>
+  <resultMap type="com.sound.haolei.core.City" id="exportCityData">
+  	<result column="id" property="value" />
+    <result column="name" property="text" />
+    <collection property="children" ofType="java.util.Map" column="id" select="selectCountyExportData"/>
+  </resultMap>
+  <select id="selectCityExportData" resultMap="exportCityData">
+  	select id,CONCAT(name,'-',id) as name from map_city where pid=#{id} order by id asc
+  </select>
+  <select id="selectCountyExportData" resultType="java.util.Map">
+  	select CONCAT(name,'-',id) as text from map_county where cid=#{id} order by id asc
+  </select>
+  <select id="selectExportData" resultMap="exportDataResultMap">
+  	select id,CONCAT(name,'-',id) as name from map_province order by id asc
+  </select> -->
+  
+  
+</mapper>

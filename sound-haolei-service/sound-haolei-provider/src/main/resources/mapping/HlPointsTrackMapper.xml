@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sound.haolei.provider.dao.HlPointsTrackMapper" >
+  <resultMap id="BaseResultMap" type="com.sound.haolei.model.HlPointsTrack" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="channel_id" property="channelId" jdbcType="INTEGER" />
+    <result column="points" property="points" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, type, channel_id, points, description, ctime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from hl_points_track
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from hl_points_track
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sound.haolei.model.HlPointsTrack" >
+    insert into hl_points_track (id, user_id, type, 
+      channel_id, points, description, 
+      ctime)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, 
+      #{channelId,jdbcType=INTEGER}, #{points,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, 
+      #{ctime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sound.haolei.model.HlPointsTrack" >
+    insert into hl_points_track
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="points != null" >
+        points,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="ctime != null" >
+        ctime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="points != null" >
+        #{points,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sound.haolei.model.HlPointsTrack" >
+    update hl_points_track
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="points != null" >
+        points = #{points,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sound.haolei.model.HlPointsTrack" >
+    update hl_points_track
+    set user_id = #{userId,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      channel_id = #{channelId,jdbcType=INTEGER},
+      points = #{points,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      ctime = #{ctime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- ******************************************自定义start******************************************* -->
+  <!-- 根据类型查询用户积分 -->
+  <select id="selectByUserIdAndType" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from hl_points_track
+    where user_id=#{userId} and type=#{type}
+    <include refid="com.sound.haolei.dao.BaseMapper.continueQuery"/>
+    order by id desc
+    <include refid="com.sound.haolei.dao.BaseMapper.limit"/>
+    
+  </select>
+  
+  <!-- @Description 后台管理查询总条数  @author sushil-->
+  <select id="queryCount" resultType="java.lang.Long" parameterType="java.util.Map">
+  	select
+		count(1)
+	from
+		hl_points_track k
+		left join hl_user r on k.user_id = r.id 
+	<where>
+		<if test="mobile != null and mobile != ''">
+	  		r.mobile like concat(concat('%', #{mobile}), '%')
+	  	</if>
+  		<if test="type != null and type != 2 ">
+  			and k.type=#{type}
+	  	</if>
+	  	<if test="cSartTime != null and cSartTime != ''">
+				and k.ctime &gt;= #{cSartTime}
+		</if>
+		<if test="cEndTime != null and cEndTime != ''">
+				and k.ctime &lt;= #{cEndTime}
+		</if>
+		<if test="describe != null and describe != ''">
+				and k.description like CONCAT(CONCAT('%', #{describe}), '%') 
+		</if>
+		
+		<if test="jifenstart != null and jifenstart != ''">
+				and (k.points &gt;= #{jifenstart} and k.type=#{searchtype})
+		</if>
+		<if test="jifenend != null and jifenend != ''">
+				and (k.points &lt;= #{jifenend} and k.type=#{searchtype})
+		</if>
+		<if test="id != null and id != '' ">
+	  		and k.user_id=#{id}
+	  	</if>
+  	</where>
+  </select>
+   <!-- @Description 分页查询   @author sushil-->
+    <select id="queryPageResult" resultType="java.util.Map" parameterType="java.util.Map">
+  	select
+		k.id,
+		k.description,
+		k.points,
+		r.mobile,
+		k.type,
+		k.ctime,
+		r.nick_name,
+		r.id as rid
+	from
+		hl_points_track k
+		left join hl_user r on k.user_id = r.id 
+	<where>
+		<if test="mobile != null and mobile != ''">
+	  		 r.mobile  like concat(concat('%', #{mobile}), '%')
+	  	</if>
+	  	<if test="type != null and type != 2 ">
+	  		and k.type=#{type}
+	  	</if>
+	  	<if test="nickName != null and nickName != ''">
+	  		and  r.nick_name like concat(concat('%', #{nickName}), '%')
+	  	</if>
+	  	<if test="cSartTime != null and cSartTime != ''">
+				and k.ctime &gt;= #{cSartTime}
+		</if>
+		<if test="cEndTime != null and cEndTime != ''">
+				and k.ctime &lt;= #{cEndTime}
+		</if>
+		<if test="describe != null and describe != ''">
+				and k.description like CONCAT(CONCAT('%', #{describe}), '%') 
+		</if>
+		
+		<if test="jifenstart != null and jifenstart != ''">
+				and (k.points &gt;= #{jifenstart} and k.type=#{searchtype})
+		</if>
+		<if test="jifenend != null and jifenend != ''">
+				and (k.points &lt;= #{jifenend} and k.type=#{searchtype})
+		</if>
+		<if test="id != null and id != '' ">
+	  		and k.user_id=#{id}
+	  	</if>
+		
+		
+  	</where>
+    <include refid="orderby"/>
+    <include refid="limit"/>
+  </select>
+    
+   <!-- 分页限制 -->
+    <sql id="limit">
+  	<if test="curRow!=null and limitSize!='' ">limit #{curRow},#{limitSize}</if>
+  </sql>
+  <sql id="orderby">
+  		<if test="orderStr != null and orderStr != ''" >
+  			order by ${orderStr}
+  		</if>
+  </sql>
+  
+<!--   获取哟农户乐豆或登记积分 -->
+  <select id="selectUserPointsDetail" resultType="java.util.Map" >
+    select 
+    id,channel_id channelId,points,description
+    from hl_points_track
+    where user_id = #{userId} and type = #{type}
+    <if test="srzc != null and srzc ==1 " >
+  		and points &gt; 0
+  	</if>
+    <if test="srzc != null and srzc ==0 " >
+  		and points &lt; 0
+  	</if>
+  	 <include refid="com.sound.haolei.dao.BaseMapper.continueQuery"/> 
+    order by ctime desc
+    <include refid="com.sound.haolei.dao.BaseMapper.limit"/>
+  </select>
+  
+  <!-- ******************************************自定义 end********************************************* -->
+
+  
+
+  
+</mapper>

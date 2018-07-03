@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sound.haolei.provider.dao.HsAppointmentMapper">
+  <resultMap id="BaseResultMap" type="com.sound.haolei.model.HsAppointment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="substation_id" property="substationId" jdbcType="INTEGER" />
+    <result column="appointment_name" jdbcType="VARCHAR" property="appointmentName" />
+    <result column="appointment_mobile" jdbcType="VARCHAR" property="appointmentMobile" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="province_id" jdbcType="INTEGER" property="provinceId" />
+    <result column="city_id" jdbcType="INTEGER" property="cityId" />
+    <result column="county_id" jdbcType="INTEGER" property="countyId" />
+    <result column="area_id" jdbcType="INTEGER" property="areaId" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="house_id" jdbcType="INTEGER" property="houseId" />
+    <result column="house_admin_id" jdbcType="INTEGER" property="houseAdminId" />
+    <result column="starttime" jdbcType="TIMESTAMP" property="starttime" />
+    <result column="endtime" jdbcType="TIMESTAMP" property="endtime" />
+    <result column="type1" jdbcType="BIGINT" property="type1" />
+    <result column="type2" jdbcType="BIGINT" property="type2" />
+    <result column="type3" jdbcType="BIGINT" property="type3" />
+    <result column="type4" jdbcType="BIGINT" property="type4" />
+    <result column="type5" jdbcType="BIGINT" property="type5" />
+    <result column="type6" jdbcType="BIGINT" property="type6" />
+    <result column="type7" jdbcType="BIGINT" property="type7" />
+    <result column="type8" jdbcType="BIGINT" property="type8" />
+    <result column="type9" jdbcType="BIGINT" property="type9" />
+    <result column="pay_type" jdbcType="TINYINT" property="payType" />
+    <result column="pay_num" jdbcType="DECIMAL" property="payNum" />
+    <result column="buy_time" jdbcType="TIMESTAMP" property="buyTime" />
+    <result column="sell_time" jdbcType="TIMESTAMP" property="sellTime" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="cuser" jdbcType="INTEGER" property="cuser" />
+    <result column="rtime" jdbcType="TIMESTAMP" property="rtime" />
+    <result column="ruser" jdbcType="INTEGER" property="ruser" />
+    <result column="admin_user" jdbcType="INTEGER" property="adminUser" />
+    <result column="intime" jdbcType="TIMESTAMP" property="intime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, substation_id, appointment_name, appointment_mobile, type, description, province_id, 
+    city_id, county_id, area_id, address, status, remark, house_id, house_admin_id, starttime, 
+    endtime, type1, type2, type3, type4, type5, type6, type7, type8, type9, pay_type, 
+    pay_num, buy_time, sell_time, ctime, cuser, rtime, ruser, admin_user, intime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hs_appointment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hs_appointment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sound.haolei.model.HsAppointment">
+    insert into hs_appointment (id, substation_id, appointment_name, 
+      appointment_mobile, type, description, 
+      province_id, city_id, county_id, 
+      area_id, address, status, 
+      remark, house_id, house_admin_id, 
+      starttime, endtime, type1, 
+      type2, type3, type4, type5, 
+      type6, type7, type8, type9, 
+      pay_type, pay_num, buy_time, 
+      sell_time, ctime, cuser, 
+      rtime, ruser, admin_user, 
+      intime)
+    values (#{id,jdbcType=INTEGER}, #{substationId,jdbcType=INTEGER}, #{appointmentName,jdbcType=VARCHAR}, 
+      #{appointmentMobile,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{provinceId,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER}, #{countyId,jdbcType=INTEGER}, 
+      #{areaId,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{remark,jdbcType=VARCHAR}, #{houseId,jdbcType=INTEGER}, #{houseAdminId,jdbcType=INTEGER}, 
+      #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{type1,jdbcType=BIGINT}, 
+      #{type2,jdbcType=BIGINT}, #{type3,jdbcType=BIGINT}, #{type4,jdbcType=BIGINT}, #{type5,jdbcType=BIGINT}, 
+      #{type6,jdbcType=BIGINT}, #{type7,jdbcType=BIGINT}, #{type8,jdbcType=BIGINT}, #{type9,jdbcType=BIGINT}, 
+      #{payType,jdbcType=TINYINT}, #{payNum,jdbcType=DECIMAL}, #{buyTime,jdbcType=TIMESTAMP}, 
+      #{sellTime,jdbcType=TIMESTAMP}, #{ctime,jdbcType=TIMESTAMP}, #{cuser,jdbcType=INTEGER}, 
+      #{rtime,jdbcType=TIMESTAMP}, #{ruser,jdbcType=INTEGER}, #{adminUser,jdbcType=INTEGER}, 
+      #{intime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sound.haolei.model.HsAppointment">
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey> 
+    insert into hs_appointment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="substationId != null">
+        substation_id,
+      </if>
+      <if test="appointmentName != null">
+        appointment_name,
+      </if>
+      <if test="appointmentMobile != null">
+        appointment_mobile,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="provinceId != null">
+        province_id,
+      </if>
+      <if test="cityId != null">
+        city_id,
+      </if>
+      <if test="countyId != null">
+        county_id,
+      </if>
+      <if test="areaId != null">
+        area_id,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="houseId != null">
+        house_id,
+      </if>
+      <if test="houseAdminId != null">
+        house_admin_id,
+      </if>
+      <if test="starttime != null">
+        starttime,
+      </if>
+      <if test="endtime != null">
+        endtime,
+      </if>
+      <if test="type1 != null">
+        type1,
+      </if>
+      <if test="type2 != null">
+        type2,
+      </if>
+      <if test="type3 != null">
+        type3,
+      </if>
+      <if test="type4 != null">
+        type4,
+      </if>
+      <if test="type5 != null">
+        type5,
+      </if>
+      <if test="type6 != null">
+        type6,
+      </if>
+      <if test="type7 != null">
+        type7,
+      </if>
+      <if test="type8 != null">
+        type8,
+      </if>
+      <if test="type9 != null">
+        type9,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+      <if test="payNum != null">
+        pay_num,
+      </if>
+      <if test="buyTime != null">
+        buy_time,
+      </if>
+      <if test="sellTime != null">
+        sell_time,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="cuser != null">
+        cuser,
+      </if>
+      <if test="rtime != null">
+        rtime,
+      </if>
+      <if test="ruser != null">
+        ruser,
+      </if>
+      <if test="adminUser != null">
+        admin_user,
+      </if>
+      <if test="intime != null">
+        intime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="substationId != null">
+        #{substationId,jdbcType=INTEGER},
+      </if>
+      <if test="appointmentName != null">
+        #{appointmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="appointmentMobile != null">
+        #{appointmentMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null">
+        #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null">
+        #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="countyId != null">
+        #{countyId,jdbcType=INTEGER},
+      </if>
+      <if test="areaId != null">
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="houseId != null">
+        #{houseId,jdbcType=INTEGER},
+      </if>
+      <if test="houseAdminId != null">
+        #{houseAdminId,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type1 != null">
+        #{type1,jdbcType=BIGINT},
+      </if>
+      <if test="type2 != null">
+        #{type2,jdbcType=BIGINT},
+      </if>
+      <if test="type3 != null">
+        #{type3,jdbcType=BIGINT},
+      </if>
+      <if test="type4 != null">
+        #{type4,jdbcType=BIGINT},
+      </if>
+      <if test="type5 != null">
+        #{type5,jdbcType=BIGINT},
+      </if>
+      <if test="type6 != null">
+        #{type6,jdbcType=BIGINT},
+      </if>
+      <if test="type7 != null">
+        #{type7,jdbcType=BIGINT},
+      </if>
+      <if test="type8 != null">
+        #{type8,jdbcType=BIGINT},
+      </if>
+      <if test="type9 != null">
+        #{type9,jdbcType=BIGINT},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=TINYINT},
+      </if>
+      <if test="payNum != null">
+        #{payNum,jdbcType=DECIMAL},
+      </if>
+      <if test="buyTime != null">
+        #{buyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sellTime != null">
+        #{sellTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cuser != null">
+        #{cuser,jdbcType=INTEGER},
+      </if>
+      <if test="rtime != null">
+        #{rtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ruser != null">
+        #{ruser,jdbcType=INTEGER},
+      </if>
+      <if test="adminUser != null">
+        #{adminUser,jdbcType=INTEGER},
+      </if>
+      <if test="intime != null">
+        #{intime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sound.haolei.model.HsAppointment">
+    update hs_appointment
+    <set>
+      <if test="substationId != null">
+        substation_id = #{substationId,jdbcType=INTEGER},
+      </if>
+      <if test="appointmentName != null">
+        appointment_name = #{appointmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="appointmentMobile != null">
+        appointment_mobile = #{appointmentMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null">
+        province_id = #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null">
+        city_id = #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="countyId != null">
+        county_id = #{countyId,jdbcType=INTEGER},
+      </if>
+      <if test="areaId != null">
+        area_id = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="houseId != null">
+        house_id = #{houseId,jdbcType=INTEGER},
+      </if>
+      <if test="houseAdminId != null">
+        house_admin_id = #{houseAdminId,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null">
+        starttime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        endtime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type1 != null">
+        type1 = #{type1,jdbcType=BIGINT},
+      </if>
+      <if test="type2 != null">
+        type2 = #{type2,jdbcType=BIGINT},
+      </if>
+      <if test="type3 != null">
+        type3 = #{type3,jdbcType=BIGINT},
+      </if>
+      <if test="type4 != null">
+        type4 = #{type4,jdbcType=BIGINT},
+      </if>
+      <if test="type5 != null">
+        type5 = #{type5,jdbcType=BIGINT},
+      </if>
+      <if test="type6 != null">
+        type6 = #{type6,jdbcType=BIGINT},
+      </if>
+      <if test="type7 != null">
+        type7 = #{type7,jdbcType=BIGINT},
+      </if>
+      <if test="type8 != null">
+        type8 = #{type8,jdbcType=BIGINT},
+      </if>
+      <if test="type9 != null">
+        type9 = #{type9,jdbcType=BIGINT},
+      </if>
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=TINYINT},
+      </if>
+      <if test="payNum != null">
+        pay_num = #{payNum,jdbcType=DECIMAL},
+      </if>
+      <if test="buyTime != null">
+        buy_time = #{buyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sellTime != null">
+        sell_time = #{sellTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cuser != null">
+        cuser = #{cuser,jdbcType=INTEGER},
+      </if>
+      <if test="rtime != null">
+        rtime = #{rtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ruser != null">
+        ruser = #{ruser,jdbcType=INTEGER},
+      </if>
+      <if test="adminUser != null">
+        admin_user = #{adminUser,jdbcType=INTEGER},
+      </if>
+      <if test="intime != null">
+        intime = #{intime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sound.haolei.model.HsAppointment">
+    update hs_appointment
+    set substation_id = #{substationId,jdbcType=INTEGER},
+      appointment_name = #{appointmentName,jdbcType=VARCHAR},
+      appointment_mobile = #{appointmentMobile,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=INTEGER},
+      city_id = #{cityId,jdbcType=INTEGER},
+      county_id = #{countyId,jdbcType=INTEGER},
+      area_id = #{areaId,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      house_id = #{houseId,jdbcType=INTEGER},
+      house_admin_id = #{houseAdminId,jdbcType=INTEGER},
+      starttime = #{starttime,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=TIMESTAMP},
+      type1 = #{type1,jdbcType=BIGINT},
+      type2 = #{type2,jdbcType=BIGINT},
+      type3 = #{type3,jdbcType=BIGINT},
+      type4 = #{type4,jdbcType=BIGINT},
+      type5 = #{type5,jdbcType=BIGINT},
+      type6 = #{type6,jdbcType=BIGINT},
+      type7 = #{type7,jdbcType=BIGINT},
+      type8 = #{type8,jdbcType=BIGINT},
+      type9 = #{type9,jdbcType=BIGINT},
+      pay_type = #{payType,jdbcType=TINYINT},
+      pay_num = #{payNum,jdbcType=DECIMAL},
+      buy_time = #{buyTime,jdbcType=TIMESTAMP},
+      sell_time = #{sellTime,jdbcType=TIMESTAMP},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      cuser = #{cuser,jdbcType=INTEGER},
+      rtime = #{rtime,jdbcType=TIMESTAMP},
+      ruser = #{ruser,jdbcType=INTEGER},
+      admin_user = #{adminUser,jdbcType=INTEGER},
+      intime = #{intime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+   <!-- **********************************************************************************自定义start************************************************************************************** -->
+    <!--@Description 根据手机号和分站查询上门回收记录 @author sushile @date 20180309-->
+    <select id="selectByAppointmentMobile" parameterType="java.util.Map"  resultType="java.util.Map">
+        select id,UNIX_TIMESTAMP(rtime)*100 as rtime,status from hs_appointment where substation_id=#{substationId} and appointment_mobile = ${mobile}
+        order by ctime DESC
+    </select>
+
+<!-- @Description  根据id查询(带分 @author sushile @date 20180309-->
+    <select id="selectByIdWithSubId" parameterType="java.lang.String"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from hs_appointment
+        where id = #{id,jdbcType=INTEGER} and substation_id=#{substationId,jdbcType=INTEGER}
+    </select>
+  
+  <!-- **********************************************************************************自定义end**************************************************************************************** -->
+  	
+  
+  
+  
+</mapper>
